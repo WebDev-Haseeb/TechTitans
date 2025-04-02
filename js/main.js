@@ -269,6 +269,33 @@ function initResources() {
             });
         });
     });
+
+    // Event cards lazy loading
+    const eventCards = document.querySelectorAll('.event-card.lazy-load');
+
+    if ('IntersectionObserver' in window) {
+        const eventCardObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    // Staggered animation based on index position
+                    const cardIndex = Array.from(eventCards).indexOf(card);
+
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                        card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    }, 150 * cardIndex);
+
+                    observer.unobserve(card);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        eventCards.forEach(card => eventCardObserver.observe(card));
+    } else {
+        // Fallback for browsers without Intersection Observer
+        eventCards.forEach(card => card.classList.add('visible'));
+    }
 }
 
 // Testimonial Slider Functionality
@@ -277,7 +304,7 @@ function initTestimonialSlider() {
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('testimonialPrev');
     const nextBtn = document.getElementById('testimonialNext');
-    
+
     let currentIndex = 0;
     let slideInterval;
     const autoSlideDelay = 5000;
@@ -294,7 +321,7 @@ function initTestimonialSlider() {
             slide.style.animation = '';
         });
         dots.forEach(dot => dot.classList.remove('active'));
-        
+
         // Add active class to current slide and dot
         slides[index].classList.add('active');
         slides[index].style.animation = 'fadeInRight 0.7s ease forwards';

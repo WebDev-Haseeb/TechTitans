@@ -471,6 +471,10 @@ section {
     border-radius: 3px;
 }
 
+.section-heading-span {
+    color: var(--primary-color);
+}
+
 .section-subtitle {
     font-size: 1.1rem;
     color: var(--text-color-light);
@@ -1245,30 +1249,56 @@ section {
 
 
 
-
-/* Events Section Styles */
+/* Enhanced Events Section Styles */
 .events-preview {
     background-color: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 0;
+}
+
+/* Add subtle background pattern */
+.events-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 80% 20%, rgba(67, 97, 238, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(76, 201, 240, 0.05) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .events-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin: 1.5rem 0;
 }
 
 .event-card {
     display: flex;
     background-color: var(--card-bg);
-    border-radius: 10px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 5px 15px var(--shadow-color);
-    transition: all var(--transition-speed) ease;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Lazy loading animation */
+.event-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px var(--shadow-color);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px var(--shadow-color);
 }
 
 .event-date {
@@ -1276,34 +1306,73 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    background-image: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    min-width: 110px;
+    background-image: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 1.5rem;
+    padding: 2rem 1rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle pattern to event date background */
+.event-date::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 10px 10px;
+    opacity: 0.3;
 }
 
 .day {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     line-height: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .month {
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
+    font-weight: 600;
     margin-top: 0.3rem;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
 }
 
 .event-content {
-    padding: 1.5rem;
+    padding: 2rem;
     flex-grow: 1;
 }
 
 .event-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
     color: var(--text-color);
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.event-card:hover .event-title {
+    color: var(--primary-color);
+}
+
+.event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .event-info {
@@ -1311,23 +1380,49 @@ section {
     align-items: center;
     color: var(--text-color-light);
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;
     gap: 0.5rem;
+    margin: 0;
 }
 
 .event-info i {
     color: var(--primary-color);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
 }
 
 .event-description {
-    margin: 1rem 0 1.5rem;
+    margin: 1.2rem 0 1.5rem;
     color: var(--text-color-light);
+    line-height: 1.6;
+}
+
+.event-action {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .btn-sm {
-    padding: 0.5rem 1.2rem;
+    padding: 0.7rem 1.4rem;
     font-size: 0.9rem;
+    border-radius: 10px;
+    transition: all var(--transition-speed) ease;
 }
+
+.event-seats {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-color-light);
+    background-color: var(--bg-color-offset);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+
+
 
 /* Footer Styles */
 .footer {
@@ -1643,18 +1738,28 @@ section {
     }
     
     .event-card {
-        flex-direction: column;
+        flex-direction: row; /* Keep as row on tablets */
     }
     
     .event-date {
-        flex-direction: row;
-        padding: 1rem;
-        gap: 0.5rem;
-        justify-content: center;
+        min-width: 100px;
+        padding: 1.5rem 1rem;
     }
     
-    .day, .month {
-        font-size: 1.2rem;
+    .day {
+        font-size: 2rem;
+    }
+    
+    .month {
+        font-size: 1rem;
+    }
+    
+    .event-content {
+        padding: 1.8rem;
+    }
+    
+    .event-title {
+        font-size: 1.3rem;
     }
     
     .footer-content {
@@ -1829,10 +1934,74 @@ section {
     .author-info h4 {
         font-size: 1.1rem;
     }
+
+    .events-preview {
+        padding: 4rem 0;
+    }
+    
+    .event-card {
+        flex-direction: row; /* Keep as row on medium screens */
+    }
+    
+    .event-date {
+        min-width: 90px;
+        padding: 1.2rem 0.8rem;
+    }
+    
+    .day {
+        font-size: 1.8rem;
+    }
+    
+    .month {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .event-content {
+        padding: 1.5rem;
+    }
+    
+    .event-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .event-meta {
+        gap: 0.6rem 1.2rem;
+    }
+    
+    .event-description {
+        margin: 1rem 0 1.2rem;
+        font-size: 0.95rem;
+    }
     
     .footer-links {
         flex-direction: column;
         gap: 2rem;
+    }
+}
+
+@media (max-width: 580px) {
+    .event-card {
+        flex-direction: column; /* Switch to column on smaller screens */
+    }
+    
+    .event-date {
+        width: 100%;
+        min-width: 100%;
+        padding: 1rem;
+        flex-direction: row;
+        gap: 0.8rem;
+        justify-content: center;
+    }
+    
+    .day {
+        font-size: 1.6rem;
+    }
+    
+    .month {
+        font-size: 0.9rem;
+        margin-top: 0;
     }
 }
 
@@ -2044,8 +2213,36 @@ section {
         font-size: 1rem;
     }
     
-    .event-card {
-        padding: 1.5rem;
+    .events-preview {
+        padding: 3rem 0;
+    }
+    
+    .event-content {
+        padding: 1.3rem;
+    }
+    
+    .event-meta {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    
+    .event-description {
+        font-size: 0.9rem;
+    }
+    
+    .event-action {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    
+    .btn-sm {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .event-seats {
+        align-self: flex-start;
     }
 
     .whatsapp-float {
