@@ -331,62 +331,109 @@
     <!-- Testimonials Section -->
     <section class="testimonials">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-element">
                 <h2 class="section-title">Community Feedback</h2>
                 <p class="section-subtitle">What our members say about their experience with TechTitans</p>
             </div>
-            <div class="testimonials-slider" id="testimonialSlider">
-                <div class="testimonial-item active">
-                    <div class="testimonial-content">
-                        <p class="testimonial-text">"TechTitans has been an incredible resource for my career growth.
-                            The curated resources helped me land my first software engineering job after just 6 months
-                            of learning."</p>
-                        <div class="testimonial-author">
-                            <img src="assets/images/testimonial1.jpg" alt="Testimonial Author">
-                            <div class="author-info">
-                                <h4>Michael Torres</h4>
-                                <p>Junior Developer</p>
+
+            <div class="testimonials-wrapper">
+                <div class="testimonials-slider" id="testimonialSlider">
+                    <div class="testimonial-item active">
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">TechTitans has been an incredible resource for my career growth.
+                                The curated resources helped me land my first software engineering job after just 6
+                                months of learning.</p>
+                            <div class="testimonial-author">
+                                <img src="assets/images/testimonial1.jpg" alt="Michael Torres - Junior Developer">
+                                <div class="author-info">
+                                    <h4>Michael Torres</h4>
+                                    <p>Junior Developer <span class="company-name">@CodeCraft</span></p>
+                                    <div class="author-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">The community support at TechTitans is unmatched. Whenever I'm
+                                stuck on a project, there's always someone ready to help and guide me through the
+                                challenges.</p>
+                            <div class="testimonial-author">
+                                <img src="assets/images/testimonial2.jpg" alt="Priya Sharma - UX/UI Designer">
+                                <div class="author-info">
+                                    <h4>Priya Sharma</h4>
+                                    <p>UX/UI Designer <span class="company-name">@DesignHub</span></p>
+                                    <div class="author-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">Thanks to TechTitans' internship updates, I secured a position
+                                at a leading tech company. Their resources are always up-to-date and incredibly
+                                valuable.</p>
+                            <div class="testimonial-author">
+                                <img src="assets/images/testimonial3.jpg" alt="David Wilson - Data Science Intern">
+                                <div class="author-info">
+                                    <h4>David Wilson</h4>
+                                    <p>Data Science Intern <span class="company-name">@DataMinds</span></p>
+                                    <div class="author-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p class="testimonial-text">"The community support at TechTitans is unmatched. Whenever I'm
-                            stuck on a project, there's always someone ready to help and guide me through the
-                            challenges."</p>
-                        <div class="testimonial-author">
-                            <img src="assets/images/testimonial2.jpg" alt="Testimonial Author">
-                            <div class="author-info">
-                                <h4>Priya Sharma</h4>
-                                <p>UX/UI Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p class="testimonial-text">"Thanks to TechTitans' internship updates, I secured a position at a
-                            leading tech company. Their resources are always up-to-date and incredibly valuable."</p>
-                        <div class="testimonial-author">
-                            <img src="assets/images/testimonial3.jpg" alt="Testimonial Author">
-                            <div class="author-info">
-                                <h4>David Wilson</h4>
-                                <p>Data Science Intern</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="testimonial-controls">
-                    <button class="testimonial-prev" id="testimonialPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="testimonial-prev" id="testimonialPrev" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
                     <div class="testimonial-dots">
                         <span class="dot active" data-index="0"></span>
                         <span class="dot" data-index="1"></span>
                         <span class="dot" data-index="2"></span>
                     </div>
-                    <button class="testimonial-next" id="testimonialNext"><i class="fas fa-chevron-right"></i></button>
+                    <button class="testimonial-next" id="testimonialNext" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <!-- Decorative elements -->
+        <div class="testimonials-decoration">
+            <div class="decoration-shape shape-1"></div>
+            <div class="decoration-shape shape-2"></div>
         </div>
     </section>
 

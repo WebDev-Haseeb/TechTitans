@@ -116,6 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize Resource Cards and Lazy Loading
     initResources();
+
+    // Initialize Testimonial Slider
+    initTestimonialSlider();
 });
 
 function initResources() {
@@ -269,39 +272,41 @@ function initResources() {
 }
 
 // Testimonial Slider Functionality
-document.addEventListener('DOMContentLoaded', function () {
-    // Existing code is here...
-
-    // Initialize testimonial slider
-    initTestimonialSlider();
-});
-
 function initTestimonialSlider() {
     const slides = document.querySelectorAll('.testimonial-item');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.getElementById('testimonialPrev');
     const nextBtn = document.getElementById('testimonialNext');
+    
     let currentIndex = 0;
     let slideInterval;
+    const autoSlideDelay = 5000;
+    const slideTotalCount = slides.length;
 
     // If no testimonials on page, exit early
     if (!slides.length || !dots.length) return;
 
     // Function to show a specific slide
     const showSlide = (index) => {
-        slides.forEach(slide => slide.classList.remove('active'));
+        // Remove active class from all slides and dots
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.animation = '';
+        });
         dots.forEach(dot => dot.classList.remove('active'));
-
+        
+        // Add active class to current slide and dot
         slides[index].classList.add('active');
+        slides[index].style.animation = 'fadeInRight 0.7s ease forwards';
         dots[index].classList.add('active');
     };
 
     // Start auto-slide
     const startAutoSlide = () => {
         slideInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % slides.length;
+            currentIndex = (currentIndex + 1) % slideTotalCount;
             showSlide(currentIndex);
-        }, 5000); // Change slide every 5 seconds
+        }, autoSlideDelay);
     };
 
     // Stop auto-slide
@@ -316,7 +321,7 @@ function initTestimonialSlider() {
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
             stopAutoSlide();
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            currentIndex = (currentIndex - 1 + slideTotalCount) % slideTotalCount;
             showSlide(currentIndex);
             startAutoSlide();
         });
@@ -325,7 +330,7 @@ function initTestimonialSlider() {
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             stopAutoSlide();
-            currentIndex = (currentIndex + 1) % slides.length;
+            currentIndex = (currentIndex + 1) % slideTotalCount;
             showSlide(currentIndex);
             startAutoSlide();
         });
@@ -356,14 +361,14 @@ function initTestimonialSlider() {
         if (touchStartX - touchEndX > 50) {
             // Swipe left - go to next slide
             stopAutoSlide();
-            currentIndex = (currentIndex + 1) % slides.length;
+            currentIndex = (currentIndex + 1) % slideTotalCount;
             showSlide(currentIndex);
             startAutoSlide();
         }
         if (touchEndX - touchStartX > 50) {
             // Swipe right - go to previous slide
             stopAutoSlide();
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            currentIndex = (currentIndex - 1 + slideTotalCount) % slideTotalCount;
             showSlide(currentIndex);
             startAutoSlide();
         }
@@ -372,11 +377,11 @@ function initTestimonialSlider() {
     if (testimonialSlider) {
         testimonialSlider.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
-        });
+        }, { passive: true });
 
         testimonialSlider.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
-        });
+        }, { passive: true });
     }
 }
