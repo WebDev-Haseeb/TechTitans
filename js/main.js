@@ -119,6 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize Testimonial Slider
     initTestimonialSlider();
+
+    // Initialize the footer animations
+    initFooterAnimations();
 });
 
 function initResources() {
@@ -410,5 +413,62 @@ function initTestimonialSlider() {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         }, { passive: true });
+    }
+}
+
+
+function initFooterAnimations() {
+    const footerLogo = document.querySelector('.footer-logo');
+    const footerColumns = document.querySelectorAll('.footer-links-column');
+    const footerBottom = document.querySelector('.footer-bottom');
+    
+    // Initialize Intersection Observer for footer elements
+    if ('IntersectionObserver' in window) {
+        const footerObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        // Observe footer elements
+        if (footerLogo) footerObserver.observe(footerLogo);
+        if (footerBottom) footerObserver.observe(footerBottom);
+        
+        footerColumns.forEach(column => {
+            footerObserver.observe(column);
+        });
+    } else {
+        // Fallback for browsers without Intersection Observer
+        if (footerLogo) footerLogo.classList.add('visible');
+        if (footerBottom) footerBottom.classList.add('visible');
+        
+        footerColumns.forEach(column => {
+            column.classList.add('visible');
+        });
+    }
+    
+    // Update the email address
+    const emailElement = document.querySelector('.footer-contact li:first-child');
+    if (emailElement) {
+        const mailtoLink = document.createElement('a');
+        mailtoLink.href = 'mailto:contact@techtitans.team';
+        mailtoLink.textContent = 'contact@techtitans.team';
+        
+        // Replace the content
+        emailElement.innerHTML = '<i class="fas fa-envelope"></i> ';
+        emailElement.appendChild(mailtoLink);
+    }
+    
+    // Update the copyright year
+    const copyrightElement = document.querySelector('.copyright p');
+    if (copyrightElement) {
+        const currentYear = new Date().getFullYear();
+        copyrightElement.textContent = `© ${currentYear} TechTitans. All rights reserved.`;
     }
 }
