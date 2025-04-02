@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTitans - Your Tech Community</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.svg">
+    <!-- Meta Tags for SEO -->
+    <meta name="description"
+        content="TechTitans - Access free tech resources, internship updates, and learning materials to accelerate your tech journey">
+    <meta name="keywords" content="tech community, free resources, internships, tech learning, programming">
+    <meta name="author" content="TechTitans">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="TechTitans Logo" class="logo-img">
+                    <span class="logo-text">Tech<span>Titans</span></span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item login-btn"><a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-user"></i> Sign In
+                    </a></li>
+                <li class="nav-item theme-toggle">
+                    <button id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Empowering Tech Enthusiasts</h1>
+            <p class="hero-subtitle">Access free resources, internship updates, and learning materials to accelerate
+                your tech journey</p>
+            <div class="hero-buttons">
+                <a href="resources.html" class="btn btn-primary">Explore Resources</a>
+                <a href="#" class="btn btn-secondary" id="joinCommunityBtn">Join Community</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="assets/images/hero-illustration.svg" alt="Tech community illustration">
+        </div>
+        <div class="hero-decoration">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- WhatsApp floating button -->
+    <a href="#" class="whatsapp-float" id="whatsappFloat" aria-label="Join WhatsApp Community">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
