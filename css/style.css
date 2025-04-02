@@ -483,57 +483,245 @@ section {
     margin-top: 3rem;
 }
 
-/* Resource Section Styles */
+/* Enhanced Resources Section Styles */
 .resources-preview {
     background-color: var(--bg-color-offset);
-}
-
-.resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.resource-card {
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 5px 15px var(--shadow-color);
-    transition: all var(--transition-speed) ease;
     position: relative;
     overflow: hidden;
+    padding: 6rem 0;
+}
+
+/* Background Pattern */
+.resources-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(67, 97, 238, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(76, 201, 240, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Section reveal animation */
+.reveal-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-element.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Resource Filters */
+.resource-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    background-color: var(--bg-color);
+    color: var(--text-color-light);
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Resources Grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin: 1rem 0;
+}
+
+/* Resource Cards */
+.resource-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Lazy loading animation for resource cards */
+.resource-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.resource-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    pointer-events: none;
 }
 
 .resource-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px var(--shadow-color);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px var(--shadow-color);
+}
+
+.resource-icon-container {
+    position: relative;
+    padding: 2rem 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .resource-icon {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background-image: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    border-radius: 50%;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
     color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.resource-card:hover .resource-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.resource-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+}
+
+.resource-badge.popular {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+}
+
+.resource-badge.hot {
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #ff6b6b;
+}
+
+.resource-badge.new {
+    background-color: rgba(46, 213, 115, 0.1);
+    color: #2ed573;
+}
+
+.resource-content {
+    padding: 1.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.resource-title {
     font-size: 1.5rem;
-}
-
-.resource-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     color: var(--text-color);
+    font-weight: 700;
+    transition: color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
-.resource-card p {
+.resource-card:hover .resource-title {
+    color: var(--primary-color);
+}
+
+.resource-description {
     color: var(--text-color-light);
     margin-bottom: 1.5rem;
-    flex-grow: 1;
+    line-height: 1.6;
+}
+
+.resource-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+}
+
+.resource-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.resource-meta i {
+    color: var(--primary-color);
+}
+
+.resource-includes {
+    margin-bottom: 1.5rem;
+}
+
+.resource-includes > span {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+    margin-bottom: 0.5rem;
+}
+
+.resource-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.resource-tag {
+    background-color: var(--bg-color-offset);
+    color: var(--text-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .resource-link {
@@ -542,11 +730,70 @@ section {
     color: var(--primary-color);
     font-weight: 600;
     gap: 0.5rem;
-    transition: gap var(--transition-speed) ease;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.resource-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
 }
 
 .resource-link:hover {
+    gap: 1rem;
+    color: var(--secondary-color);
+}
+
+.resource-link:hover::after {
+    width: 100%;
+}
+
+/* Section CTA enhanced */
+.section-cta {
+    text-align: center;
+    margin-top: 3.5rem;
+}
+
+.section-cta .btn {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
     gap: 0.8rem;
+    align-items: center;
+}
+
+.section-cta .btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.section-cta .btn:hover i {
+    transform: rotate(-45deg);
+}
+
+.section-cta .btn i {
+    transition: transform 0.3s ease;
+}
+
+/* Resources Card - Focused Animation */
+.resources-grid:hover .resource-card:not(:hover) {
+    opacity: 0.7;
+    transform: scale(0.98);
+}
+
+/* Utility class for hidden items */
+.hidden {
+    display: none !important;
 }
 
 /* Active Users Section */
@@ -1113,6 +1360,18 @@ section {
     .section-title {
         font-size: 2rem;
     }
+
+    .resources-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+    
+    .resource-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+        border-radius: 15px;
+    }
     
     .event-card {
         flex-direction: column;
@@ -1230,6 +1489,38 @@ section {
     .section-title {
         font-size: 1.8rem;
     }
+
+    .resources-preview {
+        padding: 4rem 0;
+    }
+    
+    .resource-filters {
+        gap: 0.6rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .resource-card {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    
+    .resource-icon-container {
+        padding: 1.8rem 1.8rem 0;
+    }
+    
+    .resource-content {
+        padding: 1.2rem 1.8rem 1.8rem;
+    }
+    
+    .resource-title {
+        font-size: 1.4rem;
+        margin: 0.8rem 0;
+    }
     
     .testimonial-content {
         padding: 2rem 1.5rem;
@@ -1311,17 +1602,76 @@ section {
     .section-subtitle {
         font-size: 0.95rem;
     }
+
+    .resources-preview {
+        padding: 3rem 0;
+    }
     
-    .resource-card,
-    .user-card,
-    .event-card {
-        padding: 1.5rem;
+    .resources-grid {
+        gap: 1.5rem;
+    }
+    
+    .resource-filters {
+        margin-bottom: 2rem;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 1rem;
+    }
+    
+    .resource-filters::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .filter-btn {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+    }
+    
+    .resource-icon-container {
+        padding: 1.5rem 1.5rem 0;
     }
     
     .resource-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+        border-radius: 14px;
+    }
+    
+    .resource-badge {
+        padding: 0.4rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .resource-content {
+        padding: 1rem 1.5rem 1.5rem;
+    }
+    
+    .resource-title {
+        font-size: 1.3rem;
+        margin: 0.8rem 0;
+    }
+    
+    .resource-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .section-cta {
+        margin-top: 2.5rem;
+    }
+    
+    .section-cta .btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+    }
+    
+    .user-card,
+    .event-card {
+        padding: 1.5rem;
     }
     
     .testimonial-controls {

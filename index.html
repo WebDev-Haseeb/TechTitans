@@ -78,54 +78,141 @@
     </section>
 
     <!-- Curated Resources Section -->
-    <section class="resources-preview">
+    <section class="resources-preview" id="resources">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal-element">
                 <h2 class="section-title">Curated Resources</h2>
-                <p class="section-subtitle">Handpicked tech resources to accelerate your learning journey</p>
+                <p class="section-subtitle">Handpicked tech materials to accelerate your learning journey</p>
             </div>
+
+            <!-- Resource Filters -->
+            <div class="resource-filters reveal-element">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="notes">Notes</button>
+                <button class="filter-btn" data-filter="cheatsheets">Cheatsheets</button>
+                <button class="filter-btn" data-filter="courses">Free Courses</button>
+                <button class="filter-btn" data-filter="jobs">Internships/Jobs</button>
+            </div>
+
             <div class="resources-grid">
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-laptop-code"></i>
+                <!-- Web Development -->
+                <div class="resource-card lazy-load" data-category="web-dev" data-types="notes cheatsheets courses">
+                    <div class="resource-icon-container">
+                        <div class="resource-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="resource-badge popular">Popular</div>
                     </div>
-                    <h3>Web Development</h3>
-                    <p>Frontend, backend, and full-stack development resources to build modern web applications.</p>
-                    <a href="resources.html#web-dev" class="resource-link">Explore <i
-                            class="fas fa-arrow-right"></i></a>
+                    <div class="resource-content">
+                        <h3 class="resource-title">Web Development</h3>
+                        <p class="resource-description">Frontend, backend, and full-stack development resources to build
+                            modern web applications.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> 24 PDFs</span>
+                            <span><i class="fas fa-download"></i> 1.2k downloads</span>
+                        </div>
+                        <div class="resource-includes">
+                            <span>Includes:</span>
+                            <div class="resource-tags">
+                                <span class="resource-tag">Notes</span>
+                                <span class="resource-tag">Cheatsheets</span>
+                                <span class="resource-tag">Courses</span>
+                            </div>
+                        </div>
+                        <a href="resources.html#web-dev" class="resource-link">Browse Resources <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                <!-- Mobile Development -->
+                <div class="resource-card lazy-load" data-category="mobile-dev" data-types="courses notes">
+                    <div class="resource-icon-container">
+                        <div class="resource-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
                     </div>
-                    <h3>Mobile Development</h3>
-                    <p>Resources for Android, iOS, and cross-platform mobile application development.</p>
-                    <a href="resources.html#mobile-dev" class="resource-link">Explore <i
-                            class="fas fa-arrow-right"></i></a>
+                    <div class="resource-content">
+                        <h3 class="resource-title">Mobile Development</h3>
+                        <p class="resource-description">Resources for Android, iOS, and cross-platform mobile
+                            application development.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> 18 PDFs</span>
+                            <span><i class="fas fa-download"></i> 840 downloads</span>
+                        </div>
+                        <div class="resource-includes">
+                            <span>Includes:</span>
+                            <div class="resource-tags">
+                                <span class="resource-tag">Courses</span>
+                                <span class="resource-tag">Notes</span>
+                            </div>
+                        </div>
+                        <a href="resources.html#mobile-dev" class="resource-link">Browse Resources <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-brain"></i>
+                <!-- AI & Machine Learning -->
+                <div class="resource-card lazy-load" data-category="ai-ml" data-types="courses jobs">
+                    <div class="resource-icon-container">
+                        <div class="resource-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="resource-badge hot">Hot</div>
                     </div>
-                    <h3>AI & Machine Learning</h3>
-                    <p>Learn artificial intelligence, machine learning, and data science fundamentals.</p>
-                    <a href="resources.html#ai-ml" class="resource-link">Explore <i class="fas fa-arrow-right"></i></a>
+                    <div class="resource-content">
+                        <h3 class="resource-title">AI & Machine Learning</h3>
+                        <p class="resource-description">Learn artificial intelligence, machine learning, and data
+                            science fundamentals.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> 32 PDFs</span>
+                            <span><i class="fas fa-download"></i> 1.5k downloads</span>
+                        </div>
+                        <div class="resource-includes">
+                            <span>Includes:</span>
+                            <div class="resource-tags">
+                                <span class="resource-tag">Free Courses</span>
+                                <span class="resource-tag">Job Listings</span>
+                            </div>
+                        </div>
+                        <a href="resources.html#ai-ml" class="resource-link">Browse Resources <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-shield-alt"></i>
+                <!-- Cybersecurity -->
+                <div class="resource-card lazy-load" data-category="cybersecurity" data-types="cheatsheets jobs">
+                    <div class="resource-icon-container">
+                        <div class="resource-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="resource-badge new">New</div>
                     </div>
-                    <h3>Cybersecurity</h3>
-                    <p>Security fundamentals, ethical hacking, and network security resources.</p>
-                    <a href="resources.html#cybersecurity" class="resource-link">Explore <i
-                            class="fas fa-arrow-right"></i></a>
+                    <div class="resource-content">
+                        <h3 class="resource-title">Cybersecurity</h3>
+                        <p class="resource-description">Security fundamentals, ethical hacking, and network security
+                            resources.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-file-pdf"></i> 16 PDFs</span>
+                            <span><i class="fas fa-download"></i> 620 downloads</span>
+                        </div>
+                        <div class="resource-includes">
+                            <span>Includes:</span>
+                            <div class="resource-tags">
+                                <span class="resource-tag">Cheatsheets</span>
+                                <span class="resource-tag">Internships</span>
+                            </div>
+                        </div>
+                        <a href="resources.html#cybersecurity" class="resource-link">Browse Resources <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="section-cta">
-                <a href="resources.html" class="btn btn-primary">View All Resources</a>
+
+            <div class="section-cta reveal-element">
+                <a href="resources.html" class="btn btn-primary">
+                    <span>View All Resources</span>
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
         </div>
     </section>
