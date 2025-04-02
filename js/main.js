@@ -122,7 +122,7 @@ function initResources() {
     // Lazy loading with Intersection Observer
     const lazyLoadElements = document.querySelectorAll('.lazy-load');
     const revealElements = document.querySelectorAll('.reveal-element');
-    
+
     // Intersection Observer for lazy loading cards
     if ('IntersectionObserver' in window) {
         // Observer for resource cards
@@ -132,17 +132,17 @@ function initResources() {
                     const card = entry.target;
                     // Staggered animation based on index position
                     const cardIndex = Array.from(lazyLoadElements).indexOf(card);
-                    
+
                     setTimeout(() => {
                         card.classList.add('visible');
                         card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                     }, 100 * cardIndex);
-                    
+
                     observer.unobserve(card);
                 }
             });
         }, { threshold: 0.15 });
-        
+
         // Observer for reveal elements (section headers, etc)
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -152,7 +152,7 @@ function initResources() {
                 }
             });
         }, { threshold: 0.15 });
-        
+
         lazyLoadElements.forEach(element => cardObserver.observe(element));
         revealElements.forEach(element => revealObserver.observe(element));
     } else {
@@ -160,34 +160,34 @@ function initResources() {
         lazyLoadElements.forEach(element => element.classList.add('visible'));
         revealElements.forEach(element => element.classList.add('revealed'));
     }
-    
+
     // Resource filtering functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
     const resourceCards = document.querySelectorAll('.resource-card');
-    
+
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            
+
             const filterValue = button.getAttribute('data-filter');
-            
+
             // Filter resources
             resourceCards.forEach(card => {
                 if (filterValue === 'all') {
                     card.classList.remove('hidden');
-                    
+
                     // Staggered re-appearance
                     setTimeout(() => {
                         card.classList.add('visible');
                     }, 100 * Array.from(resourceCards).indexOf(card));
                 } else {
                     const cardTypes = card.getAttribute('data-types');
-                    
+
                     if (cardTypes && cardTypes.includes(filterValue)) {
                         card.classList.remove('hidden');
-                        
+
                         // Staggered re-appearance
                         setTimeout(() => {
                             card.classList.add('visible');
@@ -199,7 +199,7 @@ function initResources() {
             });
         });
     });
-    
+
     // Enhanced interactions for resources
     resourceCards.forEach(card => {
         // Add hover effect that affects siblings
@@ -211,13 +211,58 @@ function initResources() {
                 }
             });
         });
-        
+
         card.addEventListener('mouseleave', () => {
             resourceCards.forEach(otherCard => {
                 if (!otherCard.classList.contains('hidden')) {
                     otherCard.style.opacity = '';
                     otherCard.style.transform = '';
                 }
+            });
+        });
+    });
+
+    // Enhanced lazy loading for user cards
+    const userCards = document.querySelectorAll('.user-card.lazy-load');
+
+    if ('IntersectionObserver' in window) {
+        const userCardObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    // Staggered animation based on index position
+                    const cardIndex = Array.from(userCards).indexOf(card);
+
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                        card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    }, 150 * cardIndex); // Slightly longer delay for dramatic effect
+
+                    observer.unobserve(card);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        userCards.forEach(card => userCardObserver.observe(card));
+    } else {
+        // Fallback for browsers without Intersection Observer
+        userCards.forEach(card => card.classList.add('visible'));
+    }
+
+    // Interactive effects for user cards
+    userCards.forEach(card => {
+        const socialLinks = card.querySelectorAll('.social-hover');
+
+        // Add hover effects for social links
+        socialLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.classList.add('pulsing');
+            });
+
+            link.addEventListener('mouseleave', () => {
+                setTimeout(() => {
+                    link.classList.remove('pulsing');
+                }, 300);
             });
         });
     });
