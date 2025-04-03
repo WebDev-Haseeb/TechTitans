@@ -14,7 +14,6 @@ function initProfileViewPage() {
     const publicLinkedIn = document.getElementById('publicLinkedIn');
     const publicGitHub = document.getElementById('publicGitHub');
     const firstName = document.getElementById('firstName');
-    const joinWhatsAppBtn = document.getElementById('joinWhatsAppBtn');
     
     // Performance: Set image dimensions to prevent layout shifts
     if (publicAvatar) {
@@ -36,14 +35,6 @@ function initProfileViewPage() {
     
     // Load profile data immediately for better UX
     loadProfileData(profileId);
-    
-    // Set up WhatsApp join button if it exists
-    if (joinWhatsAppBtn) {
-        joinWhatsAppBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open('https://chat.whatsapp.com/yourgroup', '_blank');
-        });
-    }
     
     // Show error when profile not found
     function showError() {

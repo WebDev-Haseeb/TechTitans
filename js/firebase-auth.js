@@ -145,21 +145,6 @@ function updateUIAfterSignIn(user, showNotificationFlag = false) {
                     };
 
                     return db.collection('users').doc(user.uid).set(newUser);
-                } else if (doc.exists) {
-                    // Update photoURL if needed
-                    const userData = doc.data();
-                    if (!userData.photoURL && user.photoURL) {
-                        return db.collection('users').doc(user.uid).update({
-                            photoURL: user.photoURL,
-                            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    } else if (userData.photoURL !== user.photoURL && user.photoURL) {
-                        // Photo changed, update it
-                        return db.collection('users').doc(user.uid).update({
-                            photoURL: user.photoURL,
-                            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                    }
                 }
             })
             .catch(error => {

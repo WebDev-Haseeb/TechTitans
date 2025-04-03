@@ -186,17 +186,6 @@ function initProfilePage() {
             ? window.dbModules.helpers.debounce(autoSaveProfile, 1000)
             : createDebounceFunction(autoSaveProfile, 1000);
         
-        // Auto-save on input
-        profileForm.addEventListener('input', function(e) {
-            // Skip auto-save for textarea until user stops typing
-            if (e.target.tagName !== 'TEXTAREA') {
-                const saveIndicator = getSaveIndicator();
-                saveIndicator.textContent = 'Saving...';
-                
-                debouncedSave(e);
-            }
-        });
-        
         // Regular form submission
         profileForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -214,26 +203,9 @@ function initProfilePage() {
         };
     }
     
-    // Show auto-save indicator
-    function getSaveIndicator() {
-        let saveIndicator = document.getElementById('saveIndicator');
-        
-        if (!saveIndicator) {
-            saveIndicator = document.createElement('div');
-            saveIndicator.id = 'saveIndicator';
-            saveIndicator.className = 'save-indicator';
-            saveIndicator.style.display = 'none'; // Keep it hidden
-            profileForm.appendChild(saveIndicator);
-        }
-        
-        return saveIndicator;
-    }
-    
     // Auto-save profile changes - optimized to only update changed field
     function autoSaveProfile(e) {
         if (isProfileUpdating || !currentUser) return;
-        
-        const saveIndicator = getSaveIndicator();
         
         // Only save the changed field
         const field = e.target;
@@ -543,11 +515,6 @@ function initProfilePage() {
             setTimeout(() => {
                 shareModal.querySelector('.modal-content').style.transform = 'translateY(0)';
                 shareModal.querySelector('.modal-content').style.opacity = '1';
-                
-                // Focus and select the share link for easy copying
-                if (shareLink) {
-                    shareLink.focus();
-                }
             }, 10);
         }
     }
@@ -590,8 +557,6 @@ function initProfilePage() {
         textarea.style.position = 'fixed';
         textarea.style.opacity = '0';
         document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
         
         try {
             document.execCommand('copy');

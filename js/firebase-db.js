@@ -149,12 +149,6 @@ const userProfile = {
         return cachedProfile;
       }
 
-      // If offline and not in cache, return null instead of querying Firestore
-      if (!networkStatus.isOnline && !profileData) {
-        console.log("App is offline, cannot fetch profile data");
-        return null;
-      }
-
       // Try from localStorage next
       const storedProfile = localStorage.getItem(`profile_shared_${shareId}`);
       if (storedProfile) {

@@ -82,25 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // WhatsApp Join Community Button
-    const joinCommunityBtn = document.getElementById('joinCommunityBtn');
-    const whatsappFloat = document.getElementById('whatsappFloat');
-
-    // WhatsApp community link handler (use both buttons)
-    const openWhatsApp = (e) => {
-        e.preventDefault();
-        // Replace with your actual WhatsApp group invite link
-        window.open('https://chat.whatsapp.com/your-group-invite-link', '_blank');
-    };
-
-    if (joinCommunityBtn) {
-        joinCommunityBtn.addEventListener('click', openWhatsApp);
-    }
-
-    if (whatsappFloat) {
-        whatsappFloat.addEventListener('click', openWhatsApp);
-    }
-
     // Smooth scrolling for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
