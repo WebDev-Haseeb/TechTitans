@@ -50,7 +50,6 @@ function signOut() {
 }
 
 // Function to update UI after sign in
-// Function to update UI after sign in
 function updateUIAfterSignIn(user, showNotificationFlag = false) {
     // Update the login button
     const loginBtn = document.getElementById('loginBtn');
@@ -60,19 +59,19 @@ function updateUIAfterSignIn(user, showNotificationFlag = false) {
             <span class="user-name-small">${user.displayName}</span>
         `;
         loginBtn.setAttribute('href', '#');
-        
+
         // Remove any existing event listeners by cloning the node
         const newLoginBtn = loginBtn.cloneNode(true);
         loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn);
-        
+
         // Add dropdown functionality
-        newLoginBtn.addEventListener('click', function(e) {
+        newLoginBtn.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation(); // Prevent the click from propagating
-            
+
             // Toggle dropdown menu
             let dropdown = document.getElementById('userDropdown');
-            
+
             // If dropdown exists, toggle it, otherwise create it
             if (dropdown) {
                 dropdown.remove(); // Remove existing dropdown
@@ -81,7 +80,7 @@ function updateUIAfterSignIn(user, showNotificationFlag = false) {
                 dropdown = document.createElement('div');
                 dropdown.id = 'userDropdown';
                 dropdown.className = 'user-dropdown';
-                
+
                 dropdown.innerHTML = `
                     <ul class="dropdown-menu">
                         <li>
@@ -96,21 +95,21 @@ function updateUIAfterSignIn(user, showNotificationFlag = false) {
                         </li>
                     </ul>
                 `;
-                
+
                 // Position the dropdown properly
                 const buttonRect = this.getBoundingClientRect();
                 dropdown.style.position = 'absolute';
                 dropdown.style.top = (buttonRect.bottom + 5) + 'px';
                 dropdown.style.right = (window.innerWidth - buttonRect.right) + 'px';
-                
+
                 // Add the dropdown to the document
                 document.body.appendChild(dropdown);
-                
+
                 // Add sign out event listener
-                document.getElementById('signOutDropdownBtn').addEventListener('click', function() {
+                document.getElementById('signOutDropdownBtn').addEventListener('click', function () {
                     signOut();
                 });
-                
+
                 // Close dropdown when clicking outside
                 setTimeout(() => {
                     document.addEventListener('click', function closeDropdown(e) {
@@ -128,9 +127,11 @@ function updateUIAfterSignIn(user, showNotificationFlag = false) {
     db.collection('users').doc(user.uid).get()
         .then(doc => {
             if (!doc.exists) {
+                // Create default user profile but missing photoURL
                 const newUser = {
                     firstName: user.displayName.split(' ')[0] || '',
                     lastName: user.displayName.split(' ').slice(1).join(' ') || '',
+                    photoURL: user.photoURL,
                     bio: '',
                     socialLinks: {
                         linkedin: '',
@@ -167,18 +168,18 @@ function updateUIAfterSignOut(showNotificationFlag = false) {
     const loginBtn = document.getElementById('loginBtn');
     if (loginBtn) {
         loginBtn.innerHTML = '<i class="fas fa-user"></i> Sign In';
-        
+
         // Remove any existing event listeners
         const newLoginBtn = loginBtn.cloneNode(true);
         loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn);
-        
+
         // Add new event listener
-        newLoginBtn.addEventListener('click', function(e) {
+        newLoginBtn.addEventListener('click', function (e) {
             e.preventDefault();
             signInWithGoogle();
         });
     }
-    
+
     // Remove any dropdown that might exist
     const dropdown = document.getElementById('userDropdown');
     if (dropdown) dropdown.remove();
@@ -197,12 +198,12 @@ function createUserDropdown(buttonElement, user) {
     // Remove any existing dropdown
     const existingDropdown = document.getElementById('userDropdown');
     if (existingDropdown) existingDropdown.remove();
-    
+
     // Create dropdown
     const dropdown = document.createElement('div');
     dropdown.id = 'userDropdown';
     dropdown.className = 'user-dropdown';
-    
+
     // Create dropdown content
     dropdown.innerHTML = `
         <ul class="dropdown-menu">
@@ -218,22 +219,22 @@ function createUserDropdown(buttonElement, user) {
             </li>
         </ul>
     `;
-    
+
     // Position the dropdown
     const buttonRect = buttonElement.getBoundingClientRect();
     dropdown.style.position = 'absolute';
     dropdown.style.top = buttonRect.bottom + 'px';
     dropdown.style.right = (window.innerWidth - buttonRect.right) + 'px';
-    
+
     // Add to document
     document.body.appendChild(dropdown);
-    
+
     // Add sign out event listener
-    document.getElementById('signOutDropdownBtn').addEventListener('click', function() {
+    document.getElementById('signOutDropdownBtn').addEventListener('click', function () {
         signOut();
         dropdown.remove();
     });
-    
+
     // Close dropdown when clicking outside
     document.addEventListener('click', function closeDropdown(e) {
         if (!dropdown.contains(e.target) && e.target !== buttonElement) {
