@@ -139,6 +139,7 @@ const userProfile = {
   },
 
   // Get public profile by share ID with optimized query
+  // In firebase-db.js, modify the userProfile.getByShareId function
   async getByShareId(shareId) {
     try {
       // Check cache first
@@ -166,11 +167,10 @@ const userProfile = {
         }
       }
 
-      // Query Firestore with optimized field selection
+      // Query Firestore WITHOUT using select()
       console.log("Fetching shared profile from Firestore");
       const snapshot = await db.collection('users')
         .where('profileShareId', '==', shareId)
-        .select('firstName', 'lastName', 'bio', 'photoURL', 'socialLinks', 'profileShareId')
         .limit(1)
         .get();
 
