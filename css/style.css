@@ -1985,6 +1985,7 @@ section {
         flex-direction: column;
         padding-top: 8rem;
         text-align: center;
+        min-height: auto;
     }
 
     .hero-content {
@@ -2175,6 +2176,10 @@ section {
 
     .hero-title {
         font-size: 2.5rem;
+    }
+
+    .hero-image {
+        margin-top: 0 !important;
     }
 
     section {
@@ -2416,7 +2421,6 @@ section {
     
     .resource-filters {
         margin-bottom: 2rem;
-        justify-content: flex-start;
         overflow-x: auto;
         padding-bottom: 1rem;
         -webkit-overflow-scrolling: touch;
