@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Firebase Performance if available
+    if (window.firebase && firebase.performance) {
+        try {
+            const perf = firebase.performance();
+            console.log("Performance monitoring initialized");
+        } catch (e) {
+            console.warn("Performance monitoring initialization failed", e);
+        }
+    }
+    
+    // Enable Firestore offline persistence for better performance
+    if (window.firebase && firebase.firestore) {
+        firebase.firestore().enablePersistence({synchronizeTabs: true})
+            .catch(err => console.warn("Offline persistence setup failed:", err.code));
+    }
+
     // Theme Toggle Functionality
     const themeToggle = document.getElementById('themeToggle');
 
