@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | TechTitans</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.svg">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="TechTitans Logo" class="logo-img">
+                    Tech<span>Titans</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item login-btn"><a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-user"></i> Sign In
+                    </a></li>
+                <li class="nav-item theme-toggle">
+                    <button id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <!-- Authentication message for non-authenticated users -->
+            <div id="authMessage" class="auth-message">
+                <div class="auth-content">
+                    <i class="fas fa-lock"></i>
+                    <h2>Sign In Required</h2>
+                    <p>Please sign in to view and manage your profile</p>
+                    <button id="profileSignInBtn" class="btn btn-primary">Sign In</button>
+                </div>
+            </div>
+
+            <!-- Profile container - hidden by default until user is authenticated -->
+            <div id="profileContainer" class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img id="userAvatar" src="assets/images/default-avatar.png" alt="User Avatar">
+                        </div>
+                        <h2 id="userName" class="profile-name">User Name</h2>
+                        <p id="userEmail" class="profile-email">user@example.com</p>
+                        <div class="profile-actions">
+                            <button id="shareProfileBtn" class="profile-action-btn">
+                                <i class="fas fa-share-alt"></i> Share Profile
+                            </button>
+                            <button id="signOutBtn" class="profile-action-btn">
+                                <i class="fas fa-sign-out-alt"></i> Sign Out
+                            </button>
+                        </div>
+                    </div>
+
+                    <nav class="profile-nav">
+                        <button class="profile-nav-item active" data-tab="edit-profile">
+                            <i class="fas fa-user-edit"></i> Edit Profile
+                        </button>
+                        <button class="profile-nav-item" data-tab="bookmarks">
+                            <i class="fas fa-bookmark"></i> Bookmarked Resources
+                        </button>
+                    </nav>
+                </div>
+
+                <div class="profile-content">
+                    <!-- Edit Profile Tab -->
+                    <div id="edit-profile" class="profile-tab active">
+                        <div class="profile-section-header">
+                            <h3>Profile Information</h3>
+                            <p>Update your personal information</p>
+                        </div>
+
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-group-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" class="form-input" placeholder="First Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Last Name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" name="bio" class="form-input" placeholder="Tell us about yourself (optional)" rows="4"></textarea>
+                                <div class="form-hint">Brief description about yourself</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="linkedinUrl">LinkedIn Profile</label>
+                                <div class="input-with-icon">
+                                    <i class="fab fa-linkedin"></i>
+                                    <input type="url" id="linkedinUrl" name="linkedinUrl" class="form-input" 
+                                        placeholder="https://linkedin.com/in/yourprofile">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="githubUrl">GitHub Profile</label>
+                                <div class="input-with-icon">
+                                    <i class="fab fa-github"></i>
+                                    <input type="url" id="githubUrl" name="githubUrl" class="form-input" 
+                                        placeholder="https://github.com/yourusername">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" id="saveProfileBtn" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Bookmarks Tab -->
+                    <div id="bookmarks" class="profile-tab">
+                        <div class="profile-section-header">
+                            <h3>Bookmarked Resources</h3>
+                            <p>Your saved resources for quick access</p>
+                        </div>
+
+                        <div id="bookmarksList" class="bookmarks-list">
+                            <div class="bookmark-empty-state">
+                                <i class="fas fa-bookmark"></i>
+                                <p>You haven't bookmarked any resources yet</p>
+                                <a href="resources.html" class="btn btn-secondary">Browse Resources</a>
+                            </div>
+                            <!-- Bookmarks will be populated here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Profile Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Your Profile</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Share this unique link to allow others to view your TechTitans profile:</p>
+                <div class="share-link-container">
+                    <input type="text" id="shareLink" readonly class="share-link">
+                    <button id="copyShareLinkBtn" class="btn-copy">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.svg" alt="TechTitans Logo">
+                        <span>Tech<span>Titans</span></span>
+                    </a>
+                    <p class="footer-tagline">Empowering tech enthusiasts</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="WhatsApp Community"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="resources.html#web-dev">Web Development</a></li>
+                            <li><a href="resources.html#mobile-dev">Mobile Apps</a></li>
+                            <li><a href="resources.html#ai-ml">AI & ML</a></li>
+                            <li><a href="resources.html#cybersecurity">Cybersecurity</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Contact Us</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-envelope"></i> contact@techtitans.team</li>
+                            <li><a href="#" class="contact-btn">Send a Message</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2023 TechTitans. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Auth -->
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/firebase-db.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

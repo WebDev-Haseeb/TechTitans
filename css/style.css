@@ -1792,6 +1792,63 @@ section {
 
 
 
+/* User Dropdown Menu */
+.user-dropdown {
+    position: absolute;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 200px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    animation: fadeIn 0.2s ease;
+}
+
+.dropdown-menu {
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+}
+
+.dropdown-item i {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Divider in dropdown */
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+
+
+
 
 
 
@@ -1904,6 +1961,11 @@ section {
         transform: translateX(100%);
         opacity: 0;
     }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 

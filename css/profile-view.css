@@ -1,0 +1,234 @@
+/* Public Profile View Page Styles */
+.profile-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(67, 97, 238, 0.2);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.profile-error {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.profile-error i {
+    font-size: 3rem;
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+}
+
+.profile-error h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.profile-error p {
+    color: var(--text-color-light);
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+}
+
+.public-profile {
+    display: none;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.public-profile-header {
+    background: linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(76, 201, 240, 0.1));
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.public-profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 5px solid var(--bg-color);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.public-profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.public-profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+.public-profile-bio {
+    color: var(--text-color-light);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.public-profile-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.social-link.linkedin {
+    background-color: #0077b5;
+}
+
+.social-link.github {
+    background-color: #333;
+}
+
+.social-link.hidden {
+    display: none;
+}
+
+.join-community {
+    padding: 3rem 2rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.join-community h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+.join-community p {
+    color: var(--text-color-light);
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+.join-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .public-profile-header {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .public-profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .public-profile-name {
+        font-size: 1.8rem;
+    }
+    
+    .public-profile-bio {
+        font-size: 1rem;
+    }
+    
+    .join-community {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .join-community h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .public-profile-header {
+        padding: 2rem 1rem;
+    }
+    
+    .public-profile-avatar {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .public-profile-name {
+        font-size: 1.6rem;
+    }
+    
+    .public-profile-bio {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .public-profile-social {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .social-link {
+        width: 180px;
+        margin: 0 auto;
+    }
+    
+    .join-community {
+        padding: 2rem 1rem;
+    }
+    
+    .join-community h3 {
+        font-size: 1.4rem;
+    }
+    
+    .join-community p {
+        font-size: 0.95rem;
+    }
+    
+    .join-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
