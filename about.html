@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Contact | TechTitans</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/about.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googleapis.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://firestore.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.svg">
+    <!-- Meta Tags for SEO -->
+    <meta name="description"
+        content="Learn about TechTitans - a community dedicated to empowering tech enthusiasts with resources, events, and connections.">
+    <meta name="keywords" content="tech community, about us, contact, tech learning, programming, resources">
+    <meta name="author" content="TechTitans">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="TechTitans Logo" class="logo-img">
+                    Tech<span>Titans</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+                <li class="nav-item login-btn"><a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-user"></i> Sign In
+                    </a></li>
+                <li class="nav-item theme-toggle">
+                    <button id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-hero-content reveal-element">
+                <h1 class="about-title">About <span>TechTitans</span></h1>
+                <p class="about-subtitle">Building a community that empowers tech enthusiasts and creates opportunities for growth</p>
+            </div>
+        </div>
+        <div class="about-hero-decoration">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-content reveal-element">
+                    <div class="section-header">
+                        <h2 class="section-title">Our <span class="section-heading-span">Mission</span></h2>
+                    </div>
+                    <p class="mission-text">At TechTitans, we believe in the power of knowledge sharing and community. Our mission is to create an inclusive platform where tech enthusiasts at all levels can access quality resources, connect with peers, and accelerate their growth in the tech industry.</p>
+                    <p class="mission-text">We curate the best free resources, provide timely updates on internship and job opportunities, and foster a supportive environment for learning and collaboration.</p>
+                    <div class="mission-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Active Members</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">Free Resources</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-label">Events Hosted</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mission-image reveal-element lazy-load">
+                    <img data-src="assets/images/mission-illustration.svg" src="assets/images/placeholder.png" alt="TechTitans Mission Illustration">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header reveal-element">
+                <h2 class="section-title">Our <span class="section-heading-span">Team</span></h2>
+                <p class="section-subtitle">The passionate individuals building TechTitans</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member reveal-element lazy-load">
+                    <div class="team-member-avatar">
+                        <img data-src="assets/images/team/team-1.jpg" src="assets/images/placeholder.png" alt="Haseeb Amjad - Founder">
+                    </div>
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Haseeb Amjad</h3>
+                        <p class="team-member-role">Founder & Tech Lead</p>
+                        <p class="team-member-bio">Full stack developer passionate about creating accessible tech education opportunities.</p>
+                        <div class="team-member-social">
+                            <a href="https://github.com/haseebamjad" target="_blank" class="social-link" aria-label="GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/haseebamjad" target="_blank" class="social-link" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member reveal-element lazy-load">
+                    <div class="team-member-avatar">
+                        <img data-src="assets/images/team/team-2.jpg" src="assets/images/placeholder.png" alt="Sarah Johnson - Content Director">
+                    </div>
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Sarah Johnson</h3>
+                        <p class="team-member-role">Content Director</p>
+                        <p class="team-member-bio">Technical writer and educator focused on creating accessible learning materials.</p>
+                        <div class="team-member-social">
+                            <a href="#" target="_blank" class="social-link" aria-label="GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" class="social-link" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member reveal-element lazy-load">
+                    <div class="team-member-avatar">
+                        <img data-src="assets/images/team/team-3.jpg" src="assets/images/placeholder.png" alt="Raj Patel - Community Manager">
+                    </div>
+                    <div class="team-member-info">
+                        <h3 class="team-member-name">Raj Patel</h3>
+                        <p class="team-member-role">Community Manager</p>
+                        <p class="team-member-bio">Experienced in building tech communities and organizing educational events.</p>
+                        <div class="team-member-social">
+                            <a href="#" target="_blank" class="social-link" aria-label="GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" class="social-link" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header reveal-element">
+                <h2 class="section-title">Get in <span class="section-heading-span">Touch</span></h2>
+                <p class="section-subtitle">Have questions or want to collaborate? Reach out to us</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info reveal-element">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="contact-title">Email Us</h3>
+                        <p class="contact-text">Our team typically responds within 24 hours</p>
+                        <a href="mailto:contact@techtitans.team" class="contact-link">contact@techtitans.team</a>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="contact-title">Community Chat</h3>
+                        <p class="contact-text">Join our LinkedIn community for discussions</p>
+                        <a href="https://www.linkedin.com/company/tech-titans-trivia" target="_blank" class="contact-link">TechTitans on LinkedIn</a>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3 class="contact-title">WhatsApp Group</h3>
+                        <p class="contact-text">Join our WhatsApp community for quick updates</p>
+                        <a href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi" target="_blank" class="contact-link">Join WhatsApp Group</a>
+                    </div>
+                </div>
+
+                <div class="contact-form-container reveal-element">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-header">
+                            <h3>Send us a Message</h3>
+                            <p>We'd love to hear from you!</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-input" placeholder="Type your message here..." rows="5" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary submit-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                            <p class="form-note">We'll never share your email with anyone else.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-header reveal-element">
+                <h2 class="section-title">Frequently <span class="section-heading-span">Asked Questions</span></h2>
+                <p class="section-subtitle">Quick answers to common questions about TechTitans</p>
+            </div>
+
+            <div class="faq-container reveal-element">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I join TechTitans?</h3>
+                        <span class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Joining TechTitans is simple! You can create an account by clicking the "Sign In" button at the top of the page. Our platform uses Google authentication, so you can quickly join with your existing Google account.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Are all the resources really free?</h3>
+                        <span class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We believe in accessible education for all. The resources we curate and share are completely free to access. We carefully select high-quality materials that don't require payment.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How often are new resources added?</h3>
+                        <span class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We add new resources weekly. Our content team is constantly researching and evaluating new materials to ensure they meet our quality standards before being added to the platform.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I contribute resources to TechTitans?</h3>
+                        <span class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We welcome contributions from our community members. If you have high-quality resources to share, please use our contact form to submit them for review by our content team.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-container reveal-element">
+                <div class="cta-content">
+                    <h2>Ready to Join Our Community?</h2>
+                    <p>Connect with fellow tech enthusiasts and access our curated resources</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary join-community-btn" id="joinCommunityBtnCTA">Join TechTitans</a>
+                        <a href="resources.html" class="btn btn-secondary">Explore Resources</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.svg" alt="TechTitans Logo">
+                        <span>Tech<span>Titans</span></span>
+                    </a>
+                    <p class="footer-tagline">Empowering tech enthusiasts</p>
+                    <div class="footer-social">
+                        <a target="_blank" href="https://www.linkedin.com/company/tech-titans-trivia" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                        <a target="_blank" href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi" aria-label="WhatsApp Community"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="resources.html#web-dev">Web Development</a></li>
+                            <li><a href="resources.html#mobile-dev">Mobile Apps</a></li>
+                            <li><a href="resources.html#ai-ml">AI & ML</a></li>
+                            <li><a href="resources.html#cybersecurity">Cybersecurity</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Contact Us</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-envelope"></i> contact@techtitans.team</li>
+                            <li><a href="#contact" class="contact-btn">Send a Message</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2023 TechTitans. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi" class="whatsapp-float" id="whatsappFloat" aria-label="Join WhatsApp Community">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Auth -->
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/firebase-db.js"></script>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/about.js"></script>
+</body>
+
+</html>
