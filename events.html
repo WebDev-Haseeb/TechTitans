@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | TechTitans</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/events.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googleapis.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://firestore.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.svg">
+    <!-- Meta Tags for SEO -->
+    <meta name="description"
+        content="Join TechTitans events, workshops, and meetups to enhance your tech skills and network with like-minded professionals.">
+    <meta name="keywords" content="tech events, programming workshops, coding bootcamps, tech meetups, webinars">
+    <meta name="author" content="TechTitans">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="TechTitans Logo" class="logo-img">
+                    Tech<span>Titans</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="events.html" class="nav-link active">Events</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item login-btn"><a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-user"></i> Sign In
+                    </a></li>
+                <li class="nav-item theme-toggle">
+                    <button id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Events Hero Section -->
+    <section class="events-hero">
+        <div class="container">
+            <div class="events-hero-content reveal-element">
+                <h1 class="events-title">Tech<span>Titans</span> Events</h1>
+                <p class="events-subtitle">Join our workshops, webinars, and tech meetups to enhance your skills and
+                    connect with the community</p>
+            </div>
+        </div>
+        <div class="events-hero-decoration">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section id="upcoming-events" class="events-section">
+        <div class="container">
+            <div class="section-header reveal-element">
+                <h2 class="section-title">Upcoming <span class="section-heading-span">Events</span></h2>
+                <p class="section-subtitle">Register now for our upcoming workshops and tech sessions</p>
+            </div>
+
+            <div class="events-grid" id="upcomingEventsGrid">
+                <!-- Event Card 1 -->
+                <div class="event-card reveal-element">
+                    <div class="event-date">
+                        <span class="day">18</span>
+                        <span class="month">May</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Web Development Fundamentals Workshop</h3>
+                        <div class="event-meta">
+                            <p class="event-info"><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</p>
+                            <p class="event-info"><i class="fas fa-map-marker-alt"></i> Online (Zoom)</p>
+                            <p class="event-info"><i class="fas fa-user-friends"></i> 40 Seats</p>
+                        </div>
+                        <p class="event-description">Learn the foundations of modern web development with HTML, CSS, and
+                            JavaScript. This hands-on workshop will guide you through building responsive websites from
+                            scratch.</p>
+                        <div class="event-tags">
+                            <span class="event-tag">Beginner</span>
+                            <span class="event-tag">Web Development</span>
+                        </div>
+                        <div class="event-action">
+                            <a href="https://forms.google.com/webdev-workshop" target="_blank"
+                                class="btn btn-primary btn-sm">Register Now</a>
+                            <span class="event-seats available">Seats Available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Card 2 -->
+                <div class="event-card reveal-element">
+                    <div class="event-date">
+                        <span class="day">25</span>
+                        <span class="month">May</span>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title">Career Panel: Breaking into Tech</h3>
+                        <div class="event-meta">
+                            <p class="event-info"><i class="fas fa-clock"></i> 6:00 PM - 8:00 PM</p>
+                            <p class="event-info"><i class="fas fa-map-marker-alt"></i> Online (Zoom)</p>
+                            <p class="event-info"><i class="fas fa-user-friends"></i> 100 Seats</p>
+                        </div>
+                        <p class="event-description">Join industry professionals as they share insights about launching
+                            a successful career in tech. Learn about different paths, required skills, and how to stand
+                            out to employers.</p>
+                        <div class="event-tags">
+                            <span class="event-tag">Career</span>
+                            <span class="event-tag">Panel</span>
+                        </div>
+                        <div class="event-action">
+                            <a href="https://forms.google.com/career-panel" target="_blank"
+                                class="btn btn-primary btn-sm">Register Now</a>
+                            <span class="event-seats limited">Limited Seats</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Events Message (Initially hidden) -->
+                <div class="no-events-message" id="noUpcomingEvents" style="display: none;">
+                    <div class="no-events-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>No Upcoming Events</h3>
+                    <p>There are no scheduled events at the moment. Please check back later or subscribe to our
+                        newsletter for updates.</p>
+                    <a href="#suggest-event" class="btn btn-secondary">Suggest an Event</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section id="past-events" class="events-section past-events">
+        <div class="container">
+            <div class="section-header reveal-element">
+                <h2 class="section-title">Past <span class="section-heading-span">Events</span></h2>
+                <p class="section-subtitle">Our previous workshops and community gatherings</p>
+            </div>
+
+            <div class="events-grid" id="pastEventsGrid">
+                <!-- Past Event 1 -->
+                <div class="past-event-card reveal-element">
+                    <div class="past-event-header">
+                        <h3 class="past-event-title">Python Basics for Data Science</h3>
+                        <span class="past-event-date">April 10, 2023</span>
+                    </div>
+                    <div class="past-event-content">
+                        <p class="past-event-description">An introductory workshop to Python programming with a focus on
+                            data science applications. Participants learned about data structures, libraries like Pandas
+                            and NumPy, and basic data visualization.</p>
+                        <div class="past-event-meta">
+                            <span class="past-event-stat"><i class="fas fa-users"></i> 55 Attendees</span>
+                            <span class="past-event-stat"><i class="fas fa-star"></i> 4.8/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Event 2 -->
+                <div class="past-event-card reveal-element">
+                    <div class="past-event-header">
+                        <h3 class="past-event-title">Introduction to UI/UX Design</h3>
+                        <span class="past-event-date">March 15, 2023</span>
+                    </div>
+                    <div class="past-event-content">
+                        <p class="past-event-description">A workshop covering the fundamentals of UI/UX design,
+                            including user research, wireframing, and prototyping. Participants created their own mobile
+                            app designs using Figma.</p>
+                        <div class="past-event-meta">
+                            <span class="past-event-stat"><i class="fas fa-users"></i> 38 Attendees</span>
+                            <span class="past-event-stat"><i class="fas fa-star"></i> 4.6/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Event 3 -->
+                <div class="past-event-card reveal-element">
+                    <div class="past-event-header">
+                        <h3 class="past-event-title">Git & GitHub for Beginners</h3>
+                        <span class="past-event-date">February 28, 2023</span>
+                    </div>
+                    <div class="past-event-content">
+                        <p class="past-event-description">A hands-on workshop teaching the basics of version control
+                            with Git and collaborative development using GitHub. Participants worked through practical
+                            exercises for managing code.</p>
+                        <div class="past-event-meta">
+                            <span class="past-event-stat"><i class="fas fa-users"></i> 47 Attendees</span>
+                            <span class="past-event-stat"><i class="fas fa-star"></i> 4.9/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Past Events Message (Initially hidden) -->
+                <div class="no-events-message" id="noPastEvents" style="display: none;">
+                    <div class="no-events-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>No Past Events</h3>
+                    <p>We haven't held any events yet. Be the first to join our upcoming events!</p>
+                    <a href="#upcoming-events" class="btn btn-secondary">See Upcoming Events</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suggest Event Section -->
+    <section id="suggest-event" class="suggest-event-section">
+        <div class="container">
+            <div class="section-header reveal-element">
+                <h2 class="section-title">Suggest an <span class="section-heading-span">Event</span></h2>
+                <p class="section-subtitle">Have ideas for events that would benefit our community?</p>
+            </div>
+
+            <div class="suggest-event-content reveal-element">
+                <div class="suggest-event-card">
+                    <div class="suggest-event-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Help Us Grow Our Community</h3>
+                    <p>We're always looking for ideas that would benefit our members. If you have suggestions for
+                        workshops, webinars, or other tech events, we'd love to hear from you!</p>
+                    <div class="suggest-event-actions">
+                        <a href="mailto:events@techtitans.team?subject=Event%20Suggestion&body=Hello,%20I%20would%20like%20to%20suggest%20an%20event:" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i> Email Your Suggestion
+                        </a>
+                        <a href="about.html#contact" class="btn btn-secondary">
+                            <i class="fas fa-comment-alt"></i> Use Contact Form
+                        </a>
+                    </div>
+                    <div class="suggest-event-types">
+                        <div class="suggest-type">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>Workshops</span>
+                        </div>
+                        <div class="suggest-type">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Webinars</span>
+                        </div>
+                        <div class="suggest-type">
+                            <i class="fas fa-users"></i>
+                            <span>Panels</span>
+                        </div>
+                        <div class="suggest-type">
+                            <i class="fas fa-trophy"></i>
+                            <span>Hackathons</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.svg" alt="TechTitans Logo">
+                        <span>Tech<span>Titans</span></span>
+                    </a>
+                    <p class="footer-tagline">Empowering tech enthusiasts</p>
+                    <div class="footer-social">
+                        <a target="_blank" href="https://www.linkedin.com/company/tech-titans-trivia"
+                            aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                        <a target="_blank" href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi"
+                            aria-label="WhatsApp Community"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="resources.html#web-dev">Web Development</a></li>
+                            <li><a href="resources.html#mobile-dev">Mobile Apps</a></li>
+                            <li><a href="resources.html#ai-ml">AI & ML</a></li>
+                            <li><a href="resources.html#cybersecurity">Cybersecurity</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Contact Us</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-envelope"></i> contact@techtitans.team</li>
+                            <li><a href="about.html#contact" class="contact-btn">Send a Message</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2023 TechTitans. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi" class="whatsapp-float" id="whatsappFloat"
+        aria-label="Join WhatsApp Community">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Auth -->
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/firebase-db.js"></script>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/events.js"></script>
+</body>
+
+</html>
