@@ -450,43 +450,61 @@ function initProfilePage() {
         saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
         saveBtn.disabled = true;
 
-        // Create profile update object
-        const profileUpdate = {
-            firstName,
-            lastName,
-            bio,
-            socialLinks: {
-                linkedin: linkedinUrl,
-                github: githubUrl
-            },
-            lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
-        };
-
         try {
+            // Get current user document to ensure we're not overwriting any fields
+            const userDoc = await db.collection('users').doc(currentUser.uid).get();
+            let userData = userDoc.exists ? userDoc.data() : {};
+
+            // Create update object that preserves existing data
+            const profileUpdate = {
+                firstName: firstName,
+                lastName: lastName,
+                bio: bio,
+                'socialLinks.linkedin': linkedinUrl,
+                'socialLinks.github': githubUrl,
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            console.log("Saving profile with data:", profileUpdate);
+
+            // Update the document
             await db.collection('users').doc(currentUser.uid).update(profileUpdate);
 
-            // Clear cache if using dbModules
+            // Clear all caches to ensure fresh data is loaded next time
             if (window.dbModules?.cacheStore) {
                 window.dbModules.cacheStore.clearItem('profiles', currentUser.uid);
             }
 
-            // Success notification
-            showNotification('success', 'Profile updated successfully');
+            // Also clear localStorage cache
+            localStorage.removeItem(`profile_${currentUser.uid}`);
 
-            // Update local profile data
+            // Update local userProfile object for the current session
             if (userProfile) {
                 userProfile.firstName = firstName;
                 userProfile.lastName = lastName;
                 userProfile.bio = bio;
-                userProfile.socialLinks = {
+                if (!userProfile.socialLinks) userProfile.socialLinks = {};
+                userProfile.socialLinks.linkedin = linkedinUrl;
+                userProfile.socialLinks.github = githubUrl;
+            }
+
+            // Directly update form fields to ensure they reflect saved values
+            populateProfileForm({
+                firstName,
+                lastName,
+                bio,
+                socialLinks: {
                     linkedin: linkedinUrl,
                     github: githubUrl
-                };
-            }
+                }
+            });
+
+            // Success notification
+            showNotification('success', 'Profile updated successfully');
 
         } catch (error) {
             console.error('Error updating profile:', error);
-            showNotification('error', 'Failed to update profile');
+            showNotification('error', `Failed to update profile: ${error.message}`);
         } finally {
             // Restore button text and enable it
             saveBtn.innerHTML = originalBtnText;
