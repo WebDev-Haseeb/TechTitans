@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn("Performance monitoring initialization failed", e);
         }
     }
-    
+
     // Enable Firestore offline persistence for better performance
     if (window.firebase && firebase.firestore) {
-        firebase.firestore().enablePersistence({synchronizeTabs: true})
+        firebase.firestore().enablePersistence({ synchronizeTabs: true })
             .catch(err => console.warn("Offline persistence setup failed:", err.code));
     }
 
@@ -110,6 +110,31 @@ document.addEventListener('DOMContentLoaded', function () {
             navbar.classList.remove('navbar-scrolled');
         }
     });
+
+    // Handle Join Community button
+    const joinCommunityBtn = document.getElementById('joinCommunityBtn');
+    if (joinCommunityBtn) {
+        joinCommunityBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Check if user is signed in
+            if (firebase.auth().currentUser) {
+                // User is signed in, redirect to profile page
+                window.location.href = 'profile.html';
+            } else {
+                // User is not signed in, trigger Google sign-in
+                signInWithGoogle().then(() => {
+                    // After successful sign-in, redirect to profile page
+                    if (firebase.auth().currentUser) {
+                        window.location.href = 'profile.html';
+                    }
+                }).catch(error => {
+                    console.error("Sign-in failed:", error);
+                    showNotification('error', 'Sign-in failed. Please try again.');
+                });
+            }
+        });
+    }
 
     // Initialize Resource Cards and Lazy Loading
     initResources();
@@ -418,7 +443,7 @@ function initFooterAnimations() {
     const footerLogo = document.querySelector('.footer-logo');
     const footerColumns = document.querySelectorAll('.footer-links-column');
     const footerBottom = document.querySelector('.footer-bottom');
-    
+
     // Initialize Intersection Observer for footer elements
     if ('IntersectionObserver' in window) {
         const footerObserver = new IntersectionObserver((entries, observer) => {
@@ -428,15 +453,15 @@ function initFooterAnimations() {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { 
+        }, {
             threshold: 0.15,
             rootMargin: '0px 0px -50px 0px'
         });
-        
+
         // Observe footer elements
         if (footerLogo) footerObserver.observe(footerLogo);
         if (footerBottom) footerObserver.observe(footerBottom);
-        
+
         footerColumns.forEach(column => {
             footerObserver.observe(column);
         });
@@ -444,24 +469,24 @@ function initFooterAnimations() {
         // Fallback for browsers without Intersection Observer
         if (footerLogo) footerLogo.classList.add('visible');
         if (footerBottom) footerBottom.classList.add('visible');
-        
+
         footerColumns.forEach(column => {
             column.classList.add('visible');
         });
     }
-    
+
     // Update the email address
     const emailElement = document.querySelector('.footer-contact li:first-child');
     if (emailElement) {
         const mailtoLink = document.createElement('a');
         mailtoLink.href = 'mailto:contact@techtitans.team';
         mailtoLink.textContent = 'contact@techtitans.team';
-        
+
         // Replace the content
         emailElement.innerHTML = '<i class="fas fa-envelope"></i> ';
         emailElement.appendChild(mailtoLink);
     }
-    
+
     // Update the copyright year
     const copyrightElement = document.querySelector('.copyright p');
     if (copyrightElement) {

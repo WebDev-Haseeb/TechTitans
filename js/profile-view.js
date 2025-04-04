@@ -50,101 +50,45 @@ function initProfileViewPage() {
         try {
             console.log("Loading profile data for ID:", shareId);
 
-            // Track timing for performance monitoring
-            const startTime = performance.now();
+            // Always show loading indicator while fetching fresh data
+            if (profileLoading) profileLoading.style.display = 'flex';
 
-            // First try to get profile from memory to avoid flash of unloaded content
-            let profileData = null;
-            let loadSource = "unknown";
+            // Add a timestamp parameter to force fresh data loading
+            const timestamp = Date.now();
+            console.log(`Fetching fresh data at timestamp: ${timestamp}`);
 
-            // Try global memory cache first (fastest)
-            if (window.dbModules && window.dbModules.cacheStore) {
-                profileData = window.dbModules.cacheStore.getItem('profiles', `share_${shareId}`);
-                if (profileData) {
-                    loadSource = "memory-cache";
-                }
-            }
+            // Skip all cache checks and go directly to Firestore
+            console.log("Querying Firestore for fresh profile data");
 
-            // If not in memory, try localStorage (persists between page loads)
-            if (!profileData) {
-                const storedProfile = localStorage.getItem(`profile_shared_${shareId}`);
-                if (storedProfile) {
-                    try {
-                        const parsedProfile = JSON.parse(storedProfile);
-                        const cacheAge = Date.now() - parsedProfile.timestamp;
+            const snapshot = await firebase.firestore()
+                .collection('users')
+                .where('profileShareId', '==', shareId)
+                .limit(1)
+                .get();
 
-                        // Use stored profile if less than 5 minutes old
-                        if (cacheAge < 300000) { // 5 minutes
-                            console.log("Using locally stored profile data");
-                            profileData = parsedProfile.data;
-                            loadSource = "local-storage";
-
-                            // Sync to memory cache if available
-                            if (window.dbModules && window.dbModules.cacheStore) {
-                                window.dbModules.cacheStore.setItem('profiles', `share_${shareId}`, profileData);
-                            }
-                        }
-                    } catch (e) {
-                        console.error("Error parsing stored profile:", e);
-                    }
-                }
-            }
-
-            // If still not found, try the userProfile module from dbModules
-            if (!profileData && window.dbModules && window.dbModules.userProfile) {
-                try {
-                    console.log("Using userProfile module from dbModules");
-                    profileData = await window.dbModules.userProfile.getByShareId(shareId);
-                    if (profileData) loadSource = "db-modules";
-                } catch (e) {
-                    console.error("Error using dbModules:", e);
-                }
-            }
-
-            // Last resort: direct Firestore query
-            if (!profileData) {
-                console.log("Querying Firestore for profile");
-                loadSource = "firestore";
-
-                // Optimized Firestore query - select only required fields
-                const snapshot = await firebase.firestore()
-                    .collection('users')
-                    .where('profileShareId', '==', shareId)
-                    .limit(1)
-                    .get();
-
-                if (snapshot.empty) {
-                    showError();
-                    return;
-                }
-
-                profileData = snapshot.docs[0].data();
-
-                // Cache for future use
-                if (profileData) {
-                    localStorage.setItem(`profile_shared_${shareId}`, JSON.stringify({
-                        data: profileData,
-                        timestamp: Date.now()
-                    }));
-
-                    // Also cache in memory if available
-                    if (window.dbModules && window.dbModules.cacheStore) {
-                        window.dbModules.cacheStore.setItem('profiles', `share_${shareId}`, profileData);
-                    }
-                }
-            }
-
-            // If we have profile data, update the UI
-            if (profileData) {
-                // Calculate and log performance timing
-                const endTime = performance.now();
-                console.log(`Profile loaded in ${Math.round(endTime - startTime)}ms (source: ${loadSource})`);
-
-                updateProfileUI(profileData);
-            } else {
-                console.error("No profile found with that ID");
+            if (snapshot.empty) {
+                console.error("Profile not found in Firestore");
                 showError();
+                return;
             }
+
+            // Get the fresh profile data
+            const profileData = snapshot.docs[0].data();
+
+            // Update caches with the fresh data for future reference
+            localStorage.setItem(`profile_shared_${shareId}`, JSON.stringify({
+                data: profileData,
+                timestamp: timestamp
+            }));
+
+            // Also update memory cache if available
+            if (window.dbModules && window.dbModules.cacheStore) {
+                window.dbModules.cacheStore.setItem('profiles', `share_${shareId}`, profileData);
+            }
+
+            // Update UI with the fresh data
+            if (profileLoading) profileLoading.style.display = 'none';
+            updateProfileUI(profileData);
 
         } catch (error) {
             console.error('Error loading profile:', error);
@@ -290,4 +234,27 @@ function initProfileViewPage() {
 
     // Call mobile optimization
     optimizeForMobile();
+
+    // Add this to profile-view.js
+    const joinBtn = document.querySelector('.join-community .btn-primary');
+    if (joinBtn) {
+        joinBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Check if user is signed in
+            if (firebase.auth().currentUser) {
+                // User is signed in, redirect to profile page
+                window.location.href = 'profile.html';
+            } else {
+                // User is not signed in, trigger Google sign-in
+                signInWithGoogle().then(() => {
+                    // After successful sign-in, redirect to profile page
+                    window.location.href = 'profile.html';
+                }).catch(error => {
+                    console.error("Sign-in failed:", error);
+                    showNotification('error', 'Sign-in failed. Please try again.');
+                });
+            }
+        });
+    }
 }

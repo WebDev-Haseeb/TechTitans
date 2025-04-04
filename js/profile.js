@@ -518,19 +518,22 @@ function initProfilePage() {
 
         let shareUrl;
 
+        // Add timestamp to force fresh load every time the link is opened
+        const timestamp = Date.now();
+
         // Check if we're in a local environment
         if (window.location.protocol === 'file:') {
             // Local file system - use relative paths
-            shareUrl = `profile-view.html?id=${profileShareId}`;
+            shareUrl = `profile-view.html?id=${profileShareId}&t=${timestamp}`;
         } else {
             // Web server - include origin
             const path = window.location.pathname.split('/');
             path.pop(); // Remove the current file name
             const basePath = path.join('/');
-            shareUrl = `${window.location.origin}${basePath}/profile-view.html?id=${profileShareId}`;
+            shareUrl = `${window.location.origin}${basePath}/profile-view.html?id=${profileShareId}&t=${timestamp}`;
         }
 
-        console.log("Generated share URL:", shareUrl);
+        console.log("Generated share URL with timestamp:", shareUrl);
 
         // Update the share link input
         if (shareLink) {
