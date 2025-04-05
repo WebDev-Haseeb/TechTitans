@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | TechTitans</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/resources.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googleapis.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
+    <link rel="preconnect" href="https://firestore.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.svg">
+    <!-- Meta Tags for SEO -->
+    <meta name="description"
+        content="Access TechTitans' curated collection of tech resources, tutorials, cheatsheets, and learning materials.">
+    <meta name="keywords" content="tech resources, programming tutorials, development guides, learning materials">
+    <meta name="author" content="TechTitans">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.svg" alt="TechTitans Logo" class="logo-img">
+                    Tech<span>Titans</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="resources.html" class="nav-link active">Resources</a></li>
+                <li class="nav-item"><a href="events.html" class="nav-link">Events</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item login-btn"><a href="#" class="nav-link" id="loginBtn">
+                        <i class="fas fa-user"></i> Sign In
+                    </a></li>
+                <li class="nav-item theme-toggle">
+                    <button id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Auth Required Message (Displays when user is not signed in) -->
+    <section class="auth-required-section" id="authRequiredMessage">
+        <div class="container">
+            <div class="auth-required-content">
+                <div class="auth-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2>Authentication Required</h2>
+                <p>You need to sign in to access our curated resources collection.</p>
+                <button id="authSignInBtn" class="btn btn-primary">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Content (Displays when user is signed in) -->
+    <div id="resourcesContent" style="display: none;">
+        <!-- Resources Hero Section -->
+        <section class="resources-hero">
+            <div class="container">
+                <div class="resources-hero-content reveal-element">
+                    <h1 class="resources-title">Tech<span>Titans</span> Resources</h1>
+                    <p class="resources-subtitle">Access our curated collection of tech learning materials, cheatsheets, and
+                        guides</p>
+                    <div class="resources-stats">
+                        <div class="resource-stat">
+                            <span class="stat-number" id="totalResources">83</span>
+                            <span class="stat-label">Resources</span>
+                        </div>
+                        <div class="resource-stat">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Categories</span>
+                        </div>
+                        <div class="resource-stat">
+                            <span class="stat-number">5K+</span>
+                            <span class="stat-label">Downloads</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="resources-hero-decoration">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+            </div>
+        </section>
+
+        <!-- Resources Filters Section -->
+        <section class="resource-filters-section" id="resourceFiltersSection">
+            <div class="container">
+                <div class="filters-wrap reveal-element">
+                    <div class="search-bar">
+                        <input type="text" id="resourceSearch" placeholder="Search resources..." aria-label="Search resources">
+                        <button id="searchButton" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <div class="filter-groups">
+                        <div class="filter-group">
+                            <label for="categoryFilter">Category</label>
+                            <select id="categoryFilter" aria-label="Filter by category">
+                                <option value="all">All Categories</option>
+                                <option value="web-dev">Web Development</option>
+                                <option value="mobile-dev">Mobile Development</option>
+                                <option value="ai-ml">AI & ML</option>
+                                <option value="database">Database</option>
+                                <option value="devops">DevOps</option>
+                                <option value="cybersecurity">Cybersecurity</option>
+                                <option value="blockchain">Blockchain</option>
+                                <option value="cloud">Cloud Computing</option>
+                                <option value="ui-ux">UI/UX Design</option>
+                                <option value="programming">Programming</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="typeFilter">Type</label>
+                            <select id="typeFilter" aria-label="Filter by type">
+                                <option value="all">All Types</option>
+                                <option value="notes">Notes</option>
+                                <option value="cheatsheets">Cheatsheets</option>
+                                <option value="courses">Courses</option>
+                                <option value="jobs">Jobs</option>
+                                <option value="tutorial">Tutorials</option>
+                                <option value="guide">Guides</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="sortFilter">Sort By</label>
+                            <select id="sortFilter" aria-label="Sort resources">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="views">Most Views</option>
+                                <option value="az">A-Z</option>
+                                <option value="za">Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="active-filters" id="activeFilters">
+                        <!-- Active filters will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Loading Indicator -->
+        <div class="resources-loading" id="resourcesLoading">
+            <div class="spinner"></div>
+            <p>Loading resources...</p>
+        </div>
+
+        <!-- Resources Grid Section -->
+        <section class="resources-main">
+            <div class="container">
+                <div class="resources-grid" id="resourcesGrid">
+                    <!-- Resources will be loaded dynamically here -->
+                </div>
+
+                <!-- Empty State (No Resources Found) -->
+                <div id="noResourcesFound" class="no-resources-message" style="display: none;">
+                    <div class="no-resources-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>No resources found</h3>
+                    <p>We couldn't find any resources matching your search criteria. Please try different filters or keywords.</p>
+                    <button id="clearFiltersBtn" class="btn btn-secondary">Clear Filters</button>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-container" id="paginationContainer">
+                    <div class="pagination-info">
+                        <span>Showing <span id="showingResources">1-25</span> of <span id="totalResourcesCount">83</span> resources</span>
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" id="prevPage" disabled aria-label="Previous page">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div id="paginationNumbers" class="pagination-numbers">
+                            <!-- Page numbers will be inserted here -->
+                        </div>
+                        <button class="pagination-btn" id="nextPage" aria-label="Next page">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Template (Hidden, used by JavaScript) -->
+        <template id="resourceTemplate">
+            <div class="resource-card reveal-element">
+                <div class="resource-header">
+                    <div class="resource-number">#000</div>
+                    <div class="card-controls">
+                        <div class="resource-badge">New</div>
+                        <button class="bookmark-btn" aria-label="Bookmark this resource">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+                <h3 class="resource-title">Resource Title</h3>
+                <div class="resource-meta">
+                    <span class="resource-views"><i class="fas fa-eye"></i> <span class="views-count">0</span> views</span>
+                    <span class="resource-date">June 25, 2024</span>
+                </div>
+                <div class="resource-tags">
+                    <!-- Tags will be inserted here -->
+                </div>
+                <div class="resource-footer">
+                    <a href="#" class="resource-link" target="_blank" rel="noopener noreferrer">
+                        <span>View Resource</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <span class="resource-type">Notes</span>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.svg" alt="TechTitans Logo">
+                        <span>Tech<span>Titans</span></span>
+                    </a>
+                    <p class="footer-tagline">Empowering tech enthusiasts</p>
+                    <div class="footer-social">
+                        <a target="_blank" href="https://www.linkedin.com/company/tech-titans-trivia" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                        <a target="_blank" href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi" aria-label="WhatsApp Community"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-links-column">
+                        <h3>Navigation</h3>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="events.html">Events</a></li>
+                            <li><a href="about.html">About</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="resources.html#web-dev">Web Development</a></li>
+                            <li><a href="resources.html#mobile-dev">Mobile Apps</a></li>
+                            <li><a href="resources.html#ai-ml">AI & ML</a></li>
+                            <li><a href="resources.html#cybersecurity">Cybersecurity</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-column">
+                        <h3>Contact Us</h3>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-envelope"></i> contact@techtitans.team</li>
+                            <li><a href="about.html#contact" class="contact-btn">Send a Message</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2023 TechTitans. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <a href="https://chat.whatsapp.com/LNK5vpWsRLcGHNFba8i2Xi" class="whatsapp-float" id="whatsappFloat" aria-label="Join WhatsApp Community">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Auth -->
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/firebase-db.js"></script>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/resources.js"></script>
+</body>
+
+</html>
