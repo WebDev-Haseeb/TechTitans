@@ -95,7 +95,7 @@ async function loadResources() {
 
         // Apply initial filtering and sorting
         applyFilters();
-        
+
     } catch (error) {
         console.error('Error loading resources:', error);
         showNotification('error', 'Failed to load resources. Please try again.');
@@ -195,7 +195,7 @@ function setupFilterListeners() {
     // Pagination buttons
     const prevPageBtn = document.getElementById('prevPage');
     const nextPageBtn = document.getElementById('nextPage');
-    
+
     if (prevPageBtn) {
         prevPageBtn.addEventListener('click', () => {
             if (resourcesState.currentPage > 1) {
@@ -206,7 +206,7 @@ function setupFilterListeners() {
             }
         });
     }
-    
+
     if (nextPageBtn) {
         nextPageBtn.addEventListener('click', () => {
             if (resourcesState.currentPage < resourcesState.totalPages) {
@@ -225,18 +225,18 @@ function resetFilters() {
     const categoryFilter = document.getElementById('categoryFilter');
     const typeFilter = document.getElementById('typeFilter');
     const sortFilter = document.getElementById('sortFilter');
-    
+
     if (searchInput) searchInput.value = '';
     if (categoryFilter) categoryFilter.value = 'all';
     if (typeFilter) typeFilter.value = 'all';
     if (sortFilter) sortFilter.value = 'newest';
-    
+
     resourcesState.searchQuery = '';
     resourcesState.category = 'all';
     resourcesState.type = 'all';
     resourcesState.sort = 'newest';
     resourcesState.currentPage = 1;
-    
+
     applyFilters();
 }
 
@@ -244,17 +244,17 @@ function resetFilters() {
 function applyFilters() {
     // Start with all resources
     let filtered = [...resourcesState.resources];
-    
+
     // Apply category filter
     if (resourcesState.category !== 'all') {
         filtered = filtered.filter(resource => resource.category === resourcesState.category);
     }
-    
+
     // Apply type filter
     if (resourcesState.type !== 'all') {
         filtered = filtered.filter(resource => resource.type === resourcesState.type);
     }
-    
+
     // Apply search query
     if (resourcesState.searchQuery) {
         filtered = filtered.filter(resource => {
@@ -262,40 +262,40 @@ function applyFilters() {
             if (resource.title.toLowerCase().includes(resourcesState.searchQuery)) {
                 return true;
             }
-            
+
             // Search in tags
-            if (resource.tags && resource.tags.some(tag => 
+            if (resource.tags && resource.tags.some(tag =>
                 tag.toLowerCase().includes(resourcesState.searchQuery)
             )) {
                 return true;
             }
-            
+
             // Search in type
             if (resource.type && resource.type.toLowerCase().includes(resourcesState.searchQuery)) {
                 return true;
             }
-            
+
             // Search in number
             if (resource.number && resource.number.includes(resourcesState.searchQuery)) {
                 return true;
             }
-            
+
             return false;
         });
     }
-    
+
     // Apply sorting - this should be applied to all resources, not just page
     filtered = sortResources(filtered, resourcesState.sort);
-    
+
     // Update filtered resources
     resourcesState.filteredResources = filtered;
-    
+
     // Update pagination
     updatePagination();
-    
+
     // Render filtered resources
     renderResources();
-    
+
     // Render active filters
     renderActiveFilters();
 
@@ -306,7 +306,7 @@ function applyFilters() {
 // Sort resources based on selected sort option
 function sortResources(resources, sortOption) {
     let sorted;
-    
+
     switch (sortOption) {
         case 'newest':
             sorted = resources.sort((a, b) => b.createdAt - a.createdAt);
@@ -326,19 +326,19 @@ function sortResources(resources, sortOption) {
         default:
             sorted = resources.sort((a, b) => b.createdAt - a.createdAt);
     }
-    
+
     return sorted;
 }
 
 // Update pagination based on filtered resources
 function updatePagination() {
     resourcesState.totalPages = Math.max(1, Math.ceil(resourcesState.filteredResources.length / resourcesState.itemsPerPage));
-    
+
     // Ensure current page is valid
     if (resourcesState.currentPage > resourcesState.totalPages) {
         resourcesState.currentPage = resourcesState.totalPages;
     }
-    
+
     // Render pagination
     renderPagination();
 }
@@ -348,19 +348,19 @@ function renderPagination() {
     const paginationNumbers = document.getElementById('paginationNumbers');
     const prevPageBtn = document.getElementById('prevPage');
     const nextPageBtn = document.getElementById('nextPage');
-    
+
     if (paginationNumbers) {
         paginationNumbers.innerHTML = '';
-        
+
         // Determine range of pages to show
         let startPage = Math.max(1, resourcesState.currentPage - 2);
         let endPage = Math.min(resourcesState.totalPages, startPage + 4);
-        
+
         // Adjust start if end is maxed out
         if (endPage === resourcesState.totalPages) {
             startPage = Math.max(1, endPage - 4);
         }
-        
+
         // Create page buttons
         for (let i = startPage; i <= endPage; i++) {
             const pageBtn = document.createElement('button');
@@ -378,12 +378,12 @@ function renderPagination() {
             paginationNumbers.appendChild(pageBtn);
         }
     }
-    
+
     // Update prev/next buttons
     if (prevPageBtn) {
         prevPageBtn.disabled = resourcesState.currentPage === 1;
     }
-    
+
     if (nextPageBtn) {
         nextPageBtn.disabled = resourcesState.currentPage === resourcesState.totalPages;
     }
@@ -393,18 +393,18 @@ function renderPagination() {
 function renderResources() {
     const resourcesGrid = document.getElementById('resourcesGrid');
     const noResourcesFound = document.getElementById('noResourcesFound');
-    
+
     if (resourcesGrid && noResourcesFound) {
         // Calculate slice indices
         const startIndex = (resourcesState.currentPage - 1) * resourcesState.itemsPerPage;
         const endIndex = startIndex + resourcesState.itemsPerPage;
-        
+
         // Get resources for current page
         const pageResources = resourcesState.filteredResources.slice(startIndex, endIndex);
-        
+
         // Clear grid
         resourcesGrid.innerHTML = '';
-        
+
         // Show appropriate message if no resources
         if (pageResources.length === 0) {
             resourcesGrid.style.display = 'none';
@@ -412,18 +412,22 @@ function renderResources() {
         } else {
             resourcesGrid.style.display = 'grid';
             noResourcesFound.style.display = 'none';
-            
+
             // Render each resource
             pageResources.forEach((resource, index) => {
                 const card = createResourceCard(resource, index);
                 resourcesGrid.appendChild(card);
-                
+
                 // Delayed reveal for staggered animation
                 setTimeout(() => {
                     card.classList.add('visible');
                 }, index * 100);
             });
         }
+    }
+
+    if (firebase.auth().currentUser) {
+        validateBookmarkStatus();
     }
 }
 
@@ -432,7 +436,7 @@ function createResourceCard(resource, index) {
     // Clone template
     const template = document.getElementById('resourceTemplate');
     const card = document.importNode(template.content, true).querySelector('.resource-card');
-    
+
     // Set resource number based on sort order and current page
     const resourceNumber = card.querySelector('.resource-number');
     if (resourceNumber) {
@@ -442,7 +446,7 @@ function createResourceCard(resource, index) {
         const totalResources = resourcesState.filteredResources.length;
         const currentPageStartIndex = (resourcesState.currentPage - 1) * resourcesState.itemsPerPage;
         const positionInFilteredList = currentPageStartIndex + index;
-        
+
         if (resourcesState.sort === 'oldest') {
             // For oldest first: start with 1 and increase
             displayNumber = positionInFilteredList + 1;
@@ -453,18 +457,21 @@ function createResourceCard(resource, index) {
             // For other sorts, use original resource number
             displayNumber = resource.number || '000';
         }
-        
+
         // Format to ensure consistent padding (e.g., 001, 023, 083)
         if (typeof displayNumber === 'number') {
             displayNumber = String(displayNumber).padStart(3, '0');
         }
-        
+
         resourceNumber.textContent = `#${displayNumber}`;
     }
-    
+
     // Set bookmark button
     const bookmarkBtn = card.querySelector('.bookmark-btn');
     if (bookmarkBtn) {
+        // Add data attribute for resource ID
+        bookmarkBtn.dataset.resourceId = resource.id;
+
         // Check if resource is bookmarked
         checkBookmarkStatus(resource.id)
             .then(isBookmarked => {
@@ -472,7 +479,7 @@ function createResourceCard(resource, index) {
                     bookmarkBtn.classList.add('bookmarked');
                     bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
                 }
-                
+
                 // Add bookmark click handler with immediate UI feedback
                 bookmarkBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -482,42 +489,42 @@ function createResourceCard(resource, index) {
                 });
             });
     }
-    
+
     // Set resource title
     const titleElement = card.querySelector('.resource-title');
     if (titleElement) {
         titleElement.textContent = resource.title;
     }
-    
+
     // Set view count
     const viewsCount = card.querySelector('.views-count');
     if (viewsCount) {
         viewsCount.textContent = resource.views || 0;
     }
-    
+
     // Set date
     const dateElement = card.querySelector('.resource-date');
     if (dateElement) {
         dateElement.textContent = formatDate(resource.createdAt);
     }
-    
+
     // Set resource link
     const linkElement = card.querySelector('.resource-link');
     if (linkElement) {
         linkElement.href = resource.link;
-        
+
         // Increment view counter when link is clicked
         linkElement.addEventListener('click', () => {
             incrementViewCount(resource.id);
         });
     }
-    
+
     // Set resource type
     const typeElement = card.querySelector('.resource-type');
     if (typeElement) {
         typeElement.textContent = resource.type ? capitalizeFirstLetter(resource.type) : 'Resource';
     }
-    
+
     // Set resource tags
     const tagsContainer = card.querySelector('.resource-tags');
     if (tagsContainer && resource.tags && resource.tags.length > 0) {
@@ -529,7 +536,7 @@ function createResourceCard(resource, index) {
             tagsContainer.appendChild(tagElement);
         });
     }
-    
+
     // Set badge (trending, popular, or new)
     const badgeElement = card.querySelector('.resource-badge');
     if (badgeElement) {
@@ -543,7 +550,7 @@ function createResourceCard(resource, index) {
             // Check if resource is new (less than 14 days old)
             const twoWeeksAgo = new Date();
             twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
-            
+
             if (resource.createdAt > twoWeeksAgo) {
                 badgeElement.textContent = 'New';
             } else {
@@ -551,14 +558,14 @@ function createResourceCard(resource, index) {
             }
         }
     }
-    
+
     return card;
 }
 
 // Format date to readable string
 function formatDate(date) {
     if (!date) return '';
-    
+
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
 }
@@ -573,14 +580,14 @@ async function checkBookmarkStatus(resourceId) {
     try {
         const user = firebase.auth().currentUser;
         if (!user) return false;
-        
+
         const bookmarkDoc = await firebase.firestore()
             .collection('users')
             .doc(user.uid)
             .collection('bookmarks')
             .doc(resourceId)
             .get();
-        
+
         return bookmarkDoc.exists;
     } catch (error) {
         console.error('Error checking bookmark status:', error);
@@ -591,7 +598,7 @@ async function checkBookmarkStatus(resourceId) {
 // Toggle bookmark UI immediately for better UX
 function toggleBookmarkUI(buttonElement) {
     const isCurrentlyBookmarked = buttonElement.classList.contains('bookmarked');
-    
+
     // Toggle UI immediately for responsive feedback
     if (isCurrentlyBookmarked) {
         buttonElement.classList.remove('bookmarked');
@@ -605,6 +612,7 @@ function toggleBookmarkUI(buttonElement) {
 }
 
 // Toggle bookmark in database after UI update
+// Toggle bookmark in database after UI update
 async function toggleBookmarkInDatabase(resource, buttonElement) {
     try {
         const user = firebase.auth().currentUser;
@@ -612,16 +620,16 @@ async function toggleBookmarkInDatabase(resource, buttonElement) {
             showNotification('error', 'You must be signed in to bookmark resources');
             return;
         }
-        
+
         const isCurrentlyBookmarked = buttonElement.classList.contains('bookmarked');
         const bookmarkRef = firebase.firestore()
             .collection('users')
             .doc(user.uid)
             .collection('bookmarks')
             .doc(resource.id);
-        
+
         if (isCurrentlyBookmarked) {
-            // Add bookmark to database with complete resource information
+            // Add complete bookmark data with server timestamp
             await bookmarkRef.set({
                 resourceId: resource.id,
                 title: resource.title,
@@ -631,11 +639,15 @@ async function toggleBookmarkInDatabase(resource, buttonElement) {
                 link: resource.link,
                 tags: resource.tags || [],
                 views: resource.views || 0,
+                // Using server timestamp ensures consistent ordering
                 bookmarkedAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
+            }, { merge: true }); // Use merge to preserve any existing fields
+
+            console.log(`Resource ${resource.id} bookmarked successfully`);
         } else {
             // Remove bookmark from database
             await bookmarkRef.delete();
+            console.log(`Resource ${resource.id} unbookmarked successfully`);
         }
     } catch (error) {
         console.error('Error updating bookmark in database:', error);
@@ -649,12 +661,12 @@ async function toggleBookmarkInDatabase(resource, buttonElement) {
 async function incrementViewCount(resourceId) {
     try {
         const resourceRef = firebase.firestore().collection('resources').doc(resourceId);
-        
+
         // Use Firebase transaction to safely increment counter
         await firebase.firestore().runTransaction(async transaction => {
             const doc = await transaction.get(resourceRef);
             if (!doc.exists) return;
-            
+
             const currentViews = doc.data().views || 0;
             transaction.update(resourceRef, { views: currentViews + 1 });
         });
@@ -667,9 +679,9 @@ async function incrementViewCount(resourceId) {
 function renderActiveFilters() {
     const activeFiltersContainer = document.getElementById('activeFilters');
     if (!activeFiltersContainer) return;
-    
+
     activeFiltersContainer.innerHTML = '';
-    
+
     // Add search query filter
     if (resourcesState.searchQuery) {
         addActiveFilterTag(activeFiltersContainer, 'Search', resourcesState.searchQuery, () => {
@@ -679,7 +691,7 @@ function renderActiveFilters() {
             applyFilters();
         });
     }
-    
+
     // Add category filter
     if (resourcesState.category !== 'all') {
         addActiveFilterTag(activeFiltersContainer, 'Category', capitalizeFirstLetter(resourcesState.category), () => {
@@ -689,7 +701,7 @@ function renderActiveFilters() {
             applyFilters();
         });
     }
-    
+
     // Add type filter
     if (resourcesState.type !== 'all') {
         addActiveFilterTag(activeFiltersContainer, 'Type', capitalizeFirstLetter(resourcesState.type), () => {
@@ -705,17 +717,17 @@ function renderActiveFilters() {
 function addActiveFilterTag(container, type, value, removeCallback) {
     const filterTag = document.createElement('div');
     filterTag.classList.add('active-filter');
-    
+
     filterTag.innerHTML = `
         ${type}: <strong>${value}</strong>
         <button aria-label="Remove filter"><i class="fas fa-times"></i></button>
     `;
-    
+
     const removeButton = filterTag.querySelector('button');
     if (removeButton) {
         removeButton.addEventListener('click', removeCallback);
     }
-    
+
     container.appendChild(filterTag);
 }
 
@@ -723,11 +735,11 @@ function addActiveFilterTag(container, type, value, removeCallback) {
 function updateResourcesCount() {
     const totalResourcesElement = document.getElementById('totalResources');
     const totalResourcesCountElement = document.getElementById('totalResourcesCount');
-    
+
     if (totalResourcesElement) {
         totalResourcesElement.textContent = resourcesState.resources.length;
     }
-    
+
     if (totalResourcesCountElement) {
         totalResourcesCountElement.textContent = resourcesState.resources.length;
     }
@@ -737,10 +749,10 @@ function updateResourcesCount() {
 function updateShowingInfo() {
     const showingResources = document.getElementById('showingResources');
     if (!showingResources) return;
-    
+
     const startIndex = (resourcesState.currentPage - 1) * resourcesState.itemsPerPage + 1;
     const endIndex = Math.min(startIndex + resourcesState.itemsPerPage - 1, resourcesState.filteredResources.length);
-    
+
     if (resourcesState.filteredResources.length === 0) {
         showingResources.textContent = '0-0';
     } else {
@@ -763,16 +775,16 @@ function showNotification(type, message, autoClose = true) {
     if (existingNotification) {
         existingNotification.remove();
     }
-    
+
     // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
-    
+
     let icon = '';
     if (type === 'success') icon = '<i class="fas fa-check-circle"></i>';
     else if (type === 'error') icon = '<i class="fas fa-exclamation-circle"></i>';
     else if (type === 'info') icon = '<i class="fas fa-info-circle"></i>';
-    
+
     notification.innerHTML = `
         ${icon}
         <p>${message}</p>
@@ -780,17 +792,17 @@ function showNotification(type, message, autoClose = true) {
             <i class="fas fa-times"></i>
         </button>
     `;
-    
+
     // Add to DOM
     document.body.appendChild(notification);
-    
+
     // Handle close button
     const closeBtn = notification.querySelector('.close-btn');
     closeBtn.addEventListener('click', () => {
         notification.classList.add('fade-out');
         setTimeout(() => notification.remove(), 300);
     });
-    
+
     // Auto close after 3 seconds
     if (autoClose) {
         setTimeout(() => {
@@ -809,7 +821,7 @@ function showNotification(type, message, autoClose = true) {
 // Debounce function to limit how often a function is called
 function debounce(func, wait) {
     let timeout;
-    return function() {
+    return function () {
         const context = this;
         const args = arguments;
         clearTimeout(timeout);
@@ -820,7 +832,7 @@ function debounce(func, wait) {
 }
 
 // Add reveal animation for elements
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const revealElements = document.querySelectorAll('.reveal-element');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -837,3 +849,51 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(element);
     });
 });
+
+async function validateBookmarkStatus() {
+    const user = firebase.auth().currentUser;
+    if (!user) return;
+
+    try {
+        // Get all bookmarks for the user
+        const bookmarksSnapshot = await firebase.firestore()
+            .collection('users')
+            .doc(user.uid)
+            .collection('bookmarks')
+            .get();
+
+        // Create a map of bookmarked resource IDs
+        const bookmarkedResources = new Map();
+        bookmarksSnapshot.docs.forEach(doc => {
+            bookmarkedResources.set(doc.id, true);
+        });
+
+        console.log(`Found ${bookmarkedResources.size} bookmarked resources`);
+
+        // Get all bookmark buttons in the UI
+        const bookmarkButtons = document.querySelectorAll('.bookmark-btn');
+
+        // Update their state to match Firestore
+        bookmarkButtons.forEach(button => {
+            const resourceId = button.dataset.resourceId;
+            if (!resourceId) return;
+
+            const isBookmarked = bookmarkedResources.has(resourceId);
+            const hasBookmarkedClass = button.classList.contains('bookmarked');
+
+            // If inconsistent, update UI
+            if (isBookmarked !== hasBookmarkedClass) {
+                console.log(`Fixing inconsistent bookmark state for resource ${resourceId}`);
+                if (isBookmarked) {
+                    button.classList.add('bookmarked');
+                    button.innerHTML = '<i class="fas fa-bookmark"></i>';
+                } else {
+                    button.classList.remove('bookmarked');
+                    button.innerHTML = '<i class="far fa-bookmark"></i>';
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Error validating bookmark status:', error);
+    }
+}
